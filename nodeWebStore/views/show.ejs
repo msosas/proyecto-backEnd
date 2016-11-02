@@ -1,0 +1,70 @@
+<% include partials/header %>
+
+
+<div id="product-show">
+    <h3><%= product.name %></h3>
+    <p class=<% if(product.available){%>'available'> Available<%}else{%>'out_of_stock'>Out of Stock <% } %></p>
+    <p class="price"> $<%= product.price %></p>
+  <div class=thumbnail>
+    <img src="<%= product.image %>">
+
+  </div>
+  <p><%= product.description %></p>
+  <p><em>Product published by: <strong><%= product.author.username %></strong></em></p>
+  <% if(currentUser && product.author.id.equals(currentUser._id)){ %>
+    <a href="/products/<%=product._id%>/edit" class="btn btn-success"><i class="fa fa-edit"></i> Edit</a>
+    <form class="inline" action="/products/<%=product._id%>?_method=DELETE" method="POST">
+      <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+    </form>
+  <% } %>
+  <div id=commentFeed>
+
+  <% if(currentUser){ %>
+    <form id=new_comment   action="/products/<%=product._id%>/comments" method="POST">
+  <% }else{ %>
+    <div id="new comment"
+  <% } %>
+      <h3>Write a New Comment:</h3>
+    <div class="form-group">
+    <textarea rows=5 class="form-control" placeholder="Write Comment..." name=body></textarea>
+    </div>
+    <% if(!currentUser){ %>
+      <p class="bg-warning ">You need to Log in to add a comment</p>
+      <a class="btn btn-info btn-sm" href="/login">Login</a>
+    </div>
+    <% }else{ %>
+    <input class="form-control btn btn-primary" type=submit>
+      </form>
+    <% } %>
+
+
+
+
+    <% product.comments.forEach(function(comment){ %>
+      <div class="comment">
+          <h4 class="c_author"><%= comment.author.username %></h4>
+          <p class="c_body"><%=comment.body%></p>
+          <p class="c_date"><%=comment.date.toTimeString().slice(0, 5)+" "+comment.date.toDateString()%></p>
+
+          <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+            <form class="hidden editForm"  method="post" action="/products/<%= product._id%>/comments/<%=comment._id%>?_method=put">
+              <div class="form-group">
+                <input class="form-control editbody" type=text name="comment[body]" value="<%=comment.body%>">
+              </div>
+              <button type="submits" class="btn btn-xs btn-primary">Edit</button>
+              <a class=cancelEdit>Cancel</a>
+            </form>
+            <form method="POST" action="/products/<%= product._id%>/comments/<%= comment._id%>?_method=delete">
+              <button class="btn btn-danger btn-xs pull-right hidden"><i class="fa fa-trash"></i></button>
+            </form>
+            <button class="btn btn-xs btn-success pull-right hidden edit"><i class="fa fa-edit"></i></button>
+
+          <% } %>
+      </div>
+    <% }) %>
+  </div>
+  <div>
+</div>
+</div>
+
+<% include partials/footer %>

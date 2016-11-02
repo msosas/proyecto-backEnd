@@ -1,0 +1,37 @@
+<% include partials/header %>
+
+<h1><%=currentUser.username%></h1>
+
+  <div><strong>Birthdate: </strong><span><%=currentUser.birthdate%></span>
+    <form class="hidden inline" action="/user/<%=currentUser._id%>?_method=put" method="post">
+      <input type="date" name="user[birthdate]" value="<%=currentUser.birthdate%>">
+      <button class="btn btn-sm btn-primary">Update!</button>
+    </form>
+    <i class="editUser fa fa-pencil"></i>
+  </div>
+  <div><strong>Hometown: </strong><span><%=currentUser.hometown%></span>
+    <form class="hidden inline" action="/user/<%=currentUser._id%>?_method=put" method="post">
+      <input type="text" name="user[hometown]" value="<%=currentUser.hometown%>">
+      <button class="btn btn-sm btn-primary">Update!</button>
+    </form>
+    <i class="editUser fa fa-pencil"></i>
+  </div>
+  <div><strong>Sex: </strong><span id=sex><%=currentUser.sex%></span>
+    <form class="hidden inline" action="/user/<%=currentUser._id%>?_method=put" method="post">
+      <label for="male"> Male </label><input type=radio name=user[sex] value=Male id="male">
+      <label for="female"> Female </label><input type=radio name=user[sex] value=Female id="female">
+      <button class="btn btn-sm btn-primary">Update!</button>
+    </form>
+    <i class="editUser fa fa-pencil"></i>
+  </div>
+
+  <div><strong>Email: </strong><span><%=currentUser.email%></span>
+    <form class="hidden inline" action="/user/<%=currentUser._id%>?_method=put" method="post">
+      <input type="email" name="user[email]" value="<%=currentUser.email%>">
+      <button class="btn btn-sm btn-primary">Update!</button>
+    </form>
+    <i class="editUser fa fa-pencil"></i>
+  </div>
+
+
+<% include partials/footer %>

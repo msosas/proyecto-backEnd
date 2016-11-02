@@ -1,0 +1,19 @@
+<% include partials/header %>
+
+<% products.forEach(function(product){ %>
+<div class="product col-md-3  col-sm-6">
+  <h3><%= product.name %></h3>
+  <p class="price">$<%= product.price %></p>
+  <div class="thumbnail thumbpropio">
+    <img class=img-responsive src="<%= product.image %>">
+  </div>
+  <p class=<% if(product.available){%>'available'> Available<%}else{%>'out_of_stock'>Out of Stock <% } %></p>
+  <a href="/products/<%= product._id %>">More Info</a>
+</div>
+
+
+
+
+<% }) %>
+
+<% include partials/footer %>
