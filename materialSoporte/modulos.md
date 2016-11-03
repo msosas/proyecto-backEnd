@@ -32,7 +32,7 @@ Corramos de nuevo `app.js`:
 ![require](./img/require2.png)
 
 El resultado es el mismo!
-Ahora, si no invocamos `saludar()` dentro de `hola.ja`, creen que la podremos invocar (usar) en `app.js`? Hagamos la prueba!
+Ahora, si no invocamos `saludar()` dentro de `hola.js`, creen que la podremos invocar (usar) en `app.js`? Hagamos la prueba!
 
 Comentamos la invocación en `hola.js`:
 ```javascript
@@ -41,7 +41,7 @@ var saludar = function() {
 }
 //saludar();
 ```
-Invacamos en `app.js`:
+Invocamos en `app.js`:
 ```javascript
 require('./hola.js');
 saludar();
@@ -66,7 +66,7 @@ var saludar = function() {
 
 module.exports = saludar;
 ```
-Ahora este módulo está exponiendo el objeto `greet`. Para usarlo en nuestro módulo tenemos que guardar lo que devuelve `require` en una variable (puedo llamar a la nueva variable como quiera):
+Ahora este módulo está exponiendo el objeto `saludar`. Para usarlo en nuestro módulo tenemos que guardar lo que devuelve `require` en una variable (puedo llamar a la nueva variable como quiera):
 
 ```javascript
 var hola = require('./hola.js');
