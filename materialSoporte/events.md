@@ -27,7 +27,19 @@ Los componentes que vemos en la figura son:
 
 * Task Queue: Cuando el SO nos indica que terminó una tarea, no podemos simplemente pasar el _callback_ al stack de JS (no sabemos que está haciendo y podría correr código en un momento inoportuno), por lo tanto, lo que hace es dejar el callback en el _Task Queue_ ( es una pila tipo FIFO ). Ahora, cuando el Stack JS está vació el TANTAN TATAN... __EVENT LOOP__ agarra el _callback_ del Queue y lo pasa al Stack JS para ser ejecutado!
 
-Toda esta interacción con el SO, el manejo del Task Queue y el Evento loop está implementado en la libreria [__libuv__](http://docs.libuv.org/en/v1.x/) que es la piedra angular de Nodejs. De hecho, su logo es un Unicornio T-rex, es demasiado copada:
+Toda esta interacción con el SO, el manejo del Task Queue y el Evento loop está implementado en la libreria [__libuv__](http://docs.libuv.org/en/v1.x/) que es la piedra angular de Nodejs. De hecho, su logo es un Unicornio T-rex, es demasiado copada:var fs = require('fs');
+
+var saludo = fs.readFileSync(__dirname + '/greet.txt', 'utf8');
+console.log(saludo);
+
+var saludo = fs.readFileSync(__dirname + '/greet.txt');
+console.log('sin encoding:' + saludo); //sin encoding
+
+fs.readFile(__dirname + '/greet.txt', 'utf8', function(err, data) {
+	console.log(data);
+});
+
+console.log('Listo!');
 
 ![libuv](./img/libuv.png)
 
