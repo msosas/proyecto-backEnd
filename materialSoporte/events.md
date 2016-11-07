@@ -9,8 +9,6 @@ En Node hay dos tipo de eventos:
 - Eventos del sistemas: Estos vienen del código en _C++_, gracias a una librería llamada _libuv_ y manejan eventos que vienen del sistema operativo como por ejemplo: Termine de leer una archivo, o recibí datos de la red, etc...
 - Eventos Customs: Estos eventos estan dentro de la parte Javascript del Core. Maneja eventos que podemos crear nosotros mismos, para eso vamos a usar el _Event Emitter_. Varias veces cuando un evento de _libuv_ sucede, genera un evento usando el _event emitter_.
 
-_Ejercicio_ Crear un forma simple de emitir eventos y capturarlos.
-
 #### Event Listener
 
 Dijimos que cuando ocurre un evento, queremos capturarlo y responder de alguna forma, para eso vamos a hacer uso de los _Events Listeners_, básicamente es el código _escucha_ por un evento y que hace algo (ejecuta código) cuando ese evento sucede. Podemos tener varios listeners escuchando el mismo evento.
@@ -32,6 +30,8 @@ Los componentes que vemos en la figura son:
 Toda esta interacción con el SO, el manejo del Task Queue y el Evento loop está implementado en la libreria [__libuv__](http://docs.libuv.org/en/v1.x/) que es la piedra angular de Nodejs. De hecho, su logo es un Unicornio T-rex, es demasiado copada:
 
 ![libuv](./img/libuv.png)
+
+__Ejercicio__: Crear un forma simple de emitir eventos y capturarlos.
 
 ### Streams, Buffers y Pipes
 
