@@ -33,6 +33,8 @@ Usando esta librería de C, Nodejs tiene módulos que nos ayudan a manejar de ma
 
 # Empezemos a construir un server básico
 
+Usando la librería antes mencionada (que está hecha en C++) y con la ayuda de otras librerías codeadas en JS, NodeJs nos provee funcionalidad para poder empezar a construir nuestro propio web server. Vamos a usar la función `http.createServer` que recibe un `listener`, o sea una función que se va a ejecutar cada vez que alguien mande un request al socket donde escuche ese server, dentro de esta función hay un event emitter el cual, cuando llega un request, ejecuta esta función, y le pasa dos parámetros: __request__ y __response__, la primera representa los datos de la request, o sea lo que llegó al server, y la segunda lo que vamos a enviar como respuesta. El puerto y la IP los setearemos con la función `listen`, que justamente recibe un puerto y una dirección IP.
+
 ```javascript
 var http = require('http'); // importamos el módulo http para poder trabajar con el protocolo
 
@@ -40,8 +42,6 @@ http.createServer( function(req, res){ // Creamos una serie de events listener, 
 	//Para crear un response empezamos escribiendo el header
 	res.writeHead(200, { 'Content-Type':'text/plain' }) //Le ponemos el status code y algunos pair-values en el header
 	res.end('Hola, Mundo!\n');
-
-
 }).listen(1337, '127.0.0.1'); //Por último tenemos que especificar en que puerto y en qué dirección va a estar escuchando nuestro servidor
 ```
 
