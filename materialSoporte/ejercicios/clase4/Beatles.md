@@ -34,19 +34,23 @@ var beatles=[{
 
 4. Ahora en la ruta "/api/John%20Lennon" deberiamos ver solo el objeto de John
 
-5. Haz lo mismo con los otros beatles. ¿Podemos tener todo en una sóla ruta?
+5. Haz lo mismo con los otros beatles. ¿Podemos tener todo en una sóla ruta?.
+
+> Pista: Pasando parámetros en las rutas.
 
 6. Si el usuario no ingresa un Beatle valido (ej: /api/Banana%20pueyrredon) tiene que darle un error diciendo que la página no se encontró.
 
-7. Ahora crea un nuevo template en el cual ingresaremos un profile page de cada beatle, el titulo de la pagina y un h1 tiene que decir el nombre, un parrafo con la fecha de nacimiento y una imagen con la profilePic.
+7. Ahora crea un nuevo template en el cual ingresaremos un profile page de cada beatle, el titulo de la pagina y un h1 tiene que dice el nombre, un parrafo con la fecha de nacimiento y una imagen con la profilePic.
 
-8. Crea una ruta en la cual si ponemos el nombre del Beatle nos muestre su profil page ej. "/Paul%20McCartney".  NO PISES TU RUTA DE API NI DE ERROR
+8. Crea una ruta en la cual si ponemos el nombre del Beatle nos muestre su profil page ej. "profile/Paul%20McCartney".  NO PISES TU RUTA DE API NI DE ERROR
 
 ## MiddleWare
 
-1. Creá un MiddleWare que mandé un mensaje por consola cuando alguien ingresa a la ruta de tu Beatle favorito.
+1. Usá el MiddleWare [`express.static`](https://expressjs.com/en/starter/static-files.html) para servir las imagénes de los Beatles en tu propio server.
 
-2. Creá un MiddleWare que cuente cuantas veces los usuarios entra a cada beatle y mostra el número por consola. Punto extra: Guardá ese dato en un archivo de texto mirando esta [guía](http://stackoverflow.com/questions/2496710/writing-files-in-node-js). Qué sucede con el contador si resetamos el server?
+2. Creá un MiddleWare que mandé un mensaje por consola cuando alguien ingresa a la ruta de tu Beatle favorito.
+
+3. Creá un MiddleWare que cuente cuantas veces los usuarios entra a cada beatle y mostra el número por consola. Punto extra: Guardá ese dato en un archivo de texto mirando esta [guía](http://stackoverflow.com/questions/2496710/writing-files-in-node-js). Qué sucede con el contador si resetamos el server? Como hacemos para no perder el contador?
 
 ## Enviando Datos
 

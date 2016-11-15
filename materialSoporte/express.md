@@ -1,295 +1,412 @@
-# Armando un Servidor Web con Nodejs
+# Express
 
-## Qué es un servidor web, exactamente?
+_Express.js_  o simplemente _Express_ es un framework diseñado para crear aplicaciones web y APIS. Está bajo la licencia [MIT](https://en.wikipedia.org/wiki/MIT_License), y es, tal vez, el framework web más usado en el ecosistema de Nodejs.
 
-Un servidor web es cualquier computadora o sistema que procese solicitudes (requests) y que devuelva una respuesta (response) a través de un protocolo de red.
+## Instalación
 
-### Modelo cliente servidor
+Vamos a iniciar una app nueva con `npm init` a la que vamos a llamar _expresstest_ y luego vamos a instalar express usando `npm`:
 
-![client-server](./img/csmodel.png)
+`npm install express --save` _--save  para que se guarde en package.json_
 
-Este es el modelo simplificado de cualquier consulta a un servidor web.
-
-El cliente pide un recurso o servicio a un servidor, usando un mensaje en un formato standart (HTTP). El servidor recibe el mensaje, lo decodifica, realiza el servicio que se le pidió y devuelve el resultado en el mismo formato.
-
-## Qué necesitamos que tenga un servidor web en Node
-
-* Maneras de organizar nuestro código para que sea reusable
-  * Nodejs Modules
-* Poder leer y escribir archivos ( input/output)
-  * streams y pipes
-* Leer y escribir en Bases de Datos
-* Poder enviar y recibir datos de internet
-* Poder interpretar los formatos estándares
-  * http_parser
-* Alguna forma de manejar procesos que lleven mucho tiempo
-  * Naturaleza asincrónica de javascript, callbacks
-
-### Entendiendo el protocolo HTTP
-
-Nodejs viene preparado para poder leer e interpretar el contenido de un mensaje HTTP. Lo logra con la librería [http_parser](https://github.com/nodejs/http-parser), qué es un programa hecho en C y que está embebido en Node.
-
-Usando esta librería de C, Nodejs tiene módulos que nos ayudan a manejar de manera fácil request y reponses HTTP. 
-
-# Empezemos a construir un server básico
+Ahora vamos a crear un archivo `index.js` _( o  con el nombre que hayan definido como entry point )_ y vamos a requerir 'express'.
 
 ```javascript
-var http = require('http'); // importamos el módulo http para poder trabajar con el protocolo
-
-http.createServer( function(req, res){ // Creamos una serie de events listener, que van a escuchar por requests que ocurren en este socket
-	//Para crear un response empezamos escribiendo el header
-	res.writeHead(200, { 'Content-Type':'text/plain' }) //Le ponemos el status code y algunos pair-values en el header
-	res.end('Hola, Mundo!\n');
-
-
-}).listen(1337, '127.0.0.1'); //Por último tenemos que especificar en que puerto y en qué dirección va a estar escuchando nuestro servidor
+var express = require('express');
 ```
 
-Para probar el código, corremos el código usando `node app.js`. Primero notamos que a diferencia de otro código que podamos haber corrido, este programa no termina su ejecución, esto sucede porque el servidor está hecho de manera que se quede escuchando indefinidamente por requests en el puerto y dirección especificadas.
-
-Ahora, para ver si está funcionando como esperábamos vamos a ir al browser y en la barra de dirección escribrimos `localhost:1337`, de esta forma el browser va a ser un request al socket donde dejamos escuchando nuestro server.
-
-![Server-Running](./img/serverRunning.png)
-
-Como vemos el servidor respondió con el texto que especificamos en nuestro código!
-
-De hecho, usando las developer tools, podemos ver el request HTTP que hizo el server:
-
-![Server-Network](./img/serverNetwork.png)
-
-
-## ¿Qué más podemos hacer, ahora que tenemos un server corriendo?
-
-### Enviando HTML
-
-Ahora vamos a mejorar el servidor para que no sólo devuelva texto plano, sino que devuelva HTML.
-Podríamos incluir el html como string dentro del código del servidor, pero eso sería engorroso de manejar.
-
-Por lo que vamos a crear un nuevo archivo HTML muy simple llamado `index.html` al que vamos a leer con el servidor.
-
-```html
- <!DOCTYPE html>
- <html>
- <head>
- 	<title>Prueba!</title>
- </head>
- <body>
- 	<h1>Hola, Mundo!</h1>
- 	<p>Bienvenidos!</p>
- </body>
- </html>
- ```
-
-Como dijimos que vamos a tener que **leer** el archivo, vamos a necesitar el módulo *fs* de nodejs.
+Cuando requerimos express, lo que nos devuelve la librería es una función, que envuelve toda la funcionalidad de express. Por eso, para inicializar una nueva applicación, vamos a crear una variable (comúnmente llamada `app`) y guardar en ella la ejecución de express.
 
 ```javascript
-var fs   = require('fs');
+var express = require('express');
+var app 	= express();	
 ```
 
-Además ahora tenemos que cambiar la propiedad `Content-type` de `text/text` a `text/html` para que el browser sepa que le estamos enviando un archivo que contiene html y no sólo texto plano. *__¿Qué pasaría si no cambiaramos esta propiedad?__*
-
-Ahora vamos a usar el método `readFileSync` de `fs` para leer el archivo `index.html` que habiamos creado y lo guardamos en una nueva variable que llamaremos `html`.
-
-__En este caso particular usaremos el método de lectura sincrónico para no complicar el código__
-
-Una vez leído el archivo, vamos a poder enviarlo como argumento del método `end`.
+Dentro de nuestra nueva variable app, vamos a tener varias funciones. Una de ella es `listen()`, que tiene envuelto adentro a la función `http.createServer()` que habíamos usado para crear nuestro propio webserver. Ahora en vez de llamar esa función directamente llamamos a `listen()` y le pasamos un puerto. 
 
 ```javascript
-var http = require('http');
-var fs   = require('fs'); //Importamos el módulo fs que nos permite leer y escribir archivos del file system
-
-http.createServer( function(req, res){ 
-	
-	res.writeHead(200, { 'Content-Type':'text/html' })
-	var html = fs.readFileSync(__dirname +'/html/index.html');
-	res.end(html);
-
-
-}).listen(1337, '127.0.0.1');
+app.listen(3000);
 ```
 
-Corremos el servidor con `node` y vemos el nuevo resultado:
+> Noten, que todo lo que hace express, lo pueden hacer ustedes también escribiendo el código, sólo es un montón de código preescrito que resuelve problemas muy comunes de una manera muy buena, justamente por eso es que es tan popular.
 
-![Server-con-Html](./img/serverConHtml.png)
+## Creando rutas
 
-Como vemos, cuando le llegó el request al server, este leyó el archivo html y lo envió. El browser interpretó que el contenido era `text/html` y lo renderizó como tal.
+Ahora la variable `app` tiene asociado varios métodos que mapean a [métodos HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), también llamados 'verbos Http'. Con esto especificamos qué queremos que haga el servidor según el tipo de método http del request y la URL.
 
-
-### Contenido Dinámico: **Templates**
-
-Si quisieramos que el contenido del html no sea estático podriamos, por ejemplo, hacer que el html varie según una variable. Veamos como podemos lograr eso.
-
-Primero vamos a crear un nuevo html al que llamaremos `template.html`. Y vamos a agregar un placeholder (en este caso particular encerramos una palabra con `{}` ), lo que haremos luego será buscar en el archivo lo que esté encerrado en `{}` y reemplazarlo por el contenido la variable que elijamos.
-
-```html
- <!DOCTYPE html>
- <html>
- <head>
- 	<title>Prueba!</title>
- </head>
- <body>
- 	<h1>Hola, {nombre}!</h1>
- 	<p>Bienvenidos!</p>
- </body>
- </html>
- ```
-Esta idea, de tener placeholders que luego serán reemplazados por contenido que esté en una variable es conocido como **Templates**. Existen varios _lenguajes_ de templating que trabajan con este concepto. Más adelante veremos algunos de ellos.
-
-Ahora volvamos al código del servidor. Ahora, antes de enviar el html leído del archivo lo vamos a tener que parsear, por eso vamos a tener que tratar el archivo como una `String` y no como un `Buffer`, por lo que agregaremos el argumento `'utf-8' a la función `readFileSync`, para que el buffer sea codificado a una String.
-
-Luego, vamos a crear la variable que va a tener el texto que queremos que se reemplaze en nuestro template. Por ejemplo: `var nombre = 'Plataforma 5'`.
-
-Ahora vamos a usar el método `replace` del objeto `String`, para que cuando encuentre el placeholder antes definido ( _{nombre}_ ) lo reemplaze por el contenido de nuestra variable `nombre`.
-
-Finalmente, enviamos lo que está en la variable `html` en el response.
+Agreguemos una ruta para `'/'` con el método GET. (_El método GET es el que hace el broswer por defecto cuando escribimos algo en la barra de direcciones_):
 
 ```javascript
-var http = require('http');
-var fs   = require('fs'); //Importamos el módulo fs que nos permite leer y escribir archivos del file system
+app.get('/', function(req, res){ //Ruta para un GET a /
 
-http.createServer( function(req, res){ 
-	
-	res.writeHead(200, { 'Content-Type':'text/html' })
-	var html = fs.readFileSync(__dirname +'/html/template.html', 'utf8'); //Codificamos el buffer para que sea una String
-	var nombre = 'Plataforma 5'; //Esta es la variable con la que vamos a reemplazar el template
-	html = html.replace('{nombre}', nombre); // Usamos el método replace es del objeto String
-	res.end(html);
+});
+```
+Como vemos, esto reemplaza la serie de `if`s que habiamos escrito para nuestro webserver antes. Además nos agrega la discriminación del método HTTP. Estos métodos reciben como parámetro un callback que correran cuando llegue un request de este tipo al URL definido ( `/` en nuestro ejemplo). Noten que ese callback tiene siempre como parámetro dos variables, `req` por __request__ y `res` por __response__, que envuelven los objetos `http.request` y `http.response` respectivamente, agregándole más funcionalidad.
 
-
-}).listen(1337, '127.0.0.1');
+```javascript
+app.get('/', function(req, res){
+	res.send('Hola');
+});
 ```
 
-Si todo funcionó bien, al recibir el request el server leerá el archivo html, reemplazará el contenido de la variable dentro del placeholder que habíamos definido. Luego enviará el resultado al browser por lo que deberíamos ver lo siguente:
+Como ejemplo, vamos a usar `res.send()` para enviar texto como respuesta. No fué necesario explicitar el `Content-type`, ya que _express_ se encarga de eso por nosotros tambien!
 
-![Server-Template](./img/serverTemplate.png)
+![Express-Example](./img/expressexample.png)
 
-### Devolviendo JSON
+Podemos ejecutar el server con `nodemon` y probar la URL `'/'` en el browser.
 
-Como sabemos, existen servidores cuyas URLS no nos devuelven un archivo HTML, si no que nos devuelven datos en formato JSON. Comunmente estos _endpoints_ son parte de un **API**.
-
-Veamos como podríamos modificar nuestro servidor para que se comporte como lo haría un endpoint de un API.
-
-Como vimos antes, lo primero que debemos cambiar es el header que indica el tipo de contenido que estamos devolviendo, ahora vamos a cambiar el `content-type` a `application/json`, que es el **MIME TYPE** para JSON.
-
-Ahora, en vez de leer de un archivo, vamos a crear algo de datos. Por ejemplo, podemos crear un objeto:
+Agreguemos una nueva ruta `/api` y retornemos un objeto JSON. Para esto, express viene preparado con la función `json()` que recibe un objeto y lo pasa como response. Noten que no tuvimos que _Serializar_ el objeto! De esta forma _express_ nos ahorra mucho tiempo.
 
 ```javascript
-var obj = {
-	nombre: 'Juan',
-	apellido: 'Perez'
-};
-```
-
-Antes de enviar el objeto, debemos convertir el contenido a un String con formato JSON. Para esto vamos a usar la función `stringify` del objeto `JSON`, el cuál transforma un objeto a un string con notación JSON.
-
-El proceso de transformar un objeto a un formato que pueda ser transferido o guardado se conoce como **SERIALIZE**. En este caso transformamos un objeto que estaba en memoria en un string con formato JSON que puede ser enviado por internet. Otros ejemplo de formatos pueden ser CSV, XML, etc.
-El proceso inverso (el de transformar de un formato a un objeto en memoria) se conoce como **DESERIALIZE**.
-
-```javascript
-var http = require('http');
-var fs   = require('fs');
-
-http.createServer( function(req, res){ 
-	
-	res.writeHead(200, { 'Content-Type':'application/json' }) //Vamos a devolver texto en formato JSON
+app.get('/api', function(req, res){
 	var obj = {
-		nombre: 'Juan',
-		apellido: 'Perez'
-	}; //Creamos un objeto de ejemplo para enviar como response
-	
-	res.end( JSON.stringify(obj) ); //Antes de enviar el objeto, debemos parsearlo y transformarlo a un string JSON
-
-}).listen(1337, '127.0.0.1');
+		nombre: 'prueba',
+		framework: 'express',
+		ventaja: 'serializó por nosotros'
+	}
+	res.json( obj );
+});
 ```
-De nuevo, corremos el servidor y vamos al browser a probar nuestro nuevo endpoint.
 
-![Server-Template](./img/jsonServer.png)
+Probemos el nuevo _endpoint_ en el browser:
 
-Como vemos, nuestro servidor nos devolvió correctamente el objeto que habiamos creado.
+![Express-Api](./img/expressapi.png)
 
-### Creando más de un Endpoint: **Routing**
+Veamos que más podemos hacer con _express_!
 
-Todos los ejemplos anteriores de servidores mantiene una sola ruta, es decir, que cualquier request que llegué al servidor va a ser servida de la misma forma ( _Prueben desde el browser hacer request a un path distinto, por ejemplo: `http://localhost:1337/index/` o `http://localhost:1337/hola.jpg`_). Esto se debe a que en ningún momento en nuestro código nos fijamos qué URL está pidiendo el request, simplemente le devolvemos lo mismo a cualquier request!
+## Routing
 
-Ahora veremos como podemos mapear distintos requests HTML a distintos contenidos en el servidor, este proceso de mapeo es conocido como **ROUTING**.
+Express nos ofrece muchísimas soluciones para varios problemas, es por eso que vamos a tener que aprender a leer y buscar en la documentación (que por cierto es muy buena) de _express_.
 
-Para hacerlo vamos a tener que examinar en cada request que llega la URL a la que quiere acceder, para eso vamos a hacer uso del objeto `req` que vive dentro de la función `createServer`. Ese objeto tiene toda la información del request que llegó, en este caso nos interesa la URL, ese dato lo encontraremos en `req.url`.
+Veamos la documentación sobre [routing](https://expressjs.com/en/guide/routing.html).
 
-Para este ejemplo vamos a agregar dos rutas, la primera _'/'_ en la que devolveremos el html leyendo del archivo como hicimos al princio, y la segunda _'/api'_ en la que devolveremos el objeto JSON.
+Como vemos, hay varias formas de hacer las rutas usando las URL: Podemos hacerlo con un nombre fijo como veniamos haciendo o de hecho también podemos usar `strings patterns` y `regular expressions` tal que matcheen múltiples rutas, por ejemplo:
 
-Como dijimos la propiedad `req.url` contiene la URL del request, por la tanto nos fijaremos en su contenido para decidir qué queremos devolver:
+### Basadas en String Patterns
+
+Esta ruta matcheará _acd_ y _abcd_:
 
 ```javascript
-var http = require('http');
-var fs   = require('fs');
+app.get('/ab?cd', function(req, res) {
+  res.send('ab?cd');
+});
+```
+Esta ruta matcheará _abcd_, _abbcd_, _abbbcd_, y así sucesivamente:
 
-http.createServer( function(req, res){ 
-	if( req.url === '/'){ //Si la URL es / devolvemos el HTML
-		res.writeHead(200, { 'Content-Type':'text/html' })
-		var html = fs.readFileSync(__dirname +'/html/index.html');
-		res.end(html);
-	}
-	if(req.url === '/api'){ //Si la URL es /api devolvemos el objeto
-		res.writeHead(200, { 'Content-Type':'application/json' })
-		var obj = {
-			nombre: 'Juan',
-			apellido: 'Perez'
-		};	
-		res.end( JSON.stringify(obj) );
-	} 
-}).listen(1337, '127.0.0.1');
+```javascript
+app.get('/ab*cd', function(req, res) {
+  res.send('ab*cd');
+});
 ```
 
-Ahora corramos el servidor, y probemos los distintos endpoints en el browser.
+### Pasando parámetros en las rutas
 
-Vamos a 'localhost:1337/':
+Veamos como nos ayuda _express_ a capturar parámetros embebidos en la URL.
 
-![Slash-Server](./img/slashServer.png)
+Veamos el siguiente ejemplo:
+```javascript
+app.get('/api/:id', function(req, res) {
+	res.json( { parametro: req.params.id } );
+});
+```
+A la ruta `/api` le hemos agregado `/:id`, ahora _express_ va a parsear esa ruta, y va a tomar como parámetro lo que esté después de la primera `/` y lo vamos a poder acceder a través del nombre `id`. Por ejemplo en `/api/2` id va a tomar el valor `2`. En `/api/hola`, id va a tomar el valor `hola`.
 
-Nos devolvió el HTML, como esperabamos!
+Para mostrar el comportamiento, esa ruta a va a devolver un objeto json con la propiedad `parametro` y cuyo valor es el contenido de `id`. Los parámetros parseados por express los vamos a encontrar en `req.params` y el nombre que pusimos después de `:` en la ruta, en este caso `req.params.id`.
 
-Ahora a 'localhost:1337/':
+Probando en el browser:
 
-![Api-Server](./img/apiserver.png)
+![Params-gif](./img/params.gif)
 
 :D
 
-__¿Qué pasa ahora con los demás endpoints, por ejemplo 'localhost:1337/hola/como/va'? Por qué el servidor se comporta de esa forma?__
+Podemos agregar más de un parámtro por URL.
+Prueben armar una ruta que maneje la siguiente URL: _/api/:id/:nombre/:valor_.
 
-### Manejando las URLs que no existen
+### Archivos Estáticos y Middleware
 
-Todos sabemos que cuando ingresamos una URL que no existe en la web terminamos obteniendo el error **404**, que es el código que define el error 'Not Found' dentro del standart HTTP.
+__Middleware__: hace referencia a código que existe entre dos capas de software, en el caso de _express_ a código que este entre el `request` y el `response`.
 
-Entonces, agreguemos a nuestro server la funcionalidad que si la URL del request no coincide con ninguna de las que habiamos ruteado que devuelva el error 404. Vamos a agregar un `else if` y luego un `else` para asegurnos que sólo se ejecute la porción de código que queremos en cada caso:
+![Express-Middleware](./img/life.png)
+
+Veamos un ejemplo muy común de middlware en _express_. En casi todas las aplicaciones web vamos a tener archivos que queremos que se bajen siempre, por ejemplo: imágenes, archivos `.css` o `.js`, etc. Como sabemos, para poder acceder a estos archivos vamos a tener que crear para cada archivo una ruta tal que sean accesibles a través de una URL. Esto puede llegar a complicarse fácilmente, no?
+Por suerte, _express_ ya pensó en esto y nos da un middleware para manejar estos _static files_ (se llaman estáticos porque no dependen de ningún input y no deben ser procesados de ninguna manera,siempre son iguales).
+
+Digamos que queremos tener una carpeta donde guardamos todos los _archivo estáticos_, comúnmente esta carpeta tiene el nombre de `public`. Dentro de ella vamos a crear un archivo `.css` y guardar ahí una imagen.
+
+__Vamos a crear una ruta que devuelva un html que utilize el archivo `.css` que acabamos de crear y también que contenga la imagen.
 
 ```javascript
-var http = require('http');
-var fs   = require('fs');
-
-http.createServer( function(req, res){ 
-	if( req.url === '/'){
-		res.writeHead(200, { 'Content-Type':'text/html' })
-		var html = fs.readFileSync(__dirname +'/html/index.html');
-		res.end(html);
-	}else if(req.url === '/api'){
-		res.writeHead(200, { 'Content-Type':'application/json' })
-		var obj = {
-			nombre: 'Juan',
-			apellido: 'Perez'
-		};	
-		res.end( JSON.stringify(obj) );
-	} else{
-		res.writeHead(404); //Ponemos el status del response a 404: Not Found
-		res.end(); //No devolvemos nada más que el estado.
-	}
-	
-}).listen(1337, '127.0.0.1');
+app.get('/static', function(req, res) {
+	res.send( '<html><head> \
+			<link href="/assets/style.css" rel="stylesheet"> \
+			</head><body> \
+				<p>Archivos estaticos rapido y facil!!</p>\
+				<img src="/assets/imagen.jpg">\
+			</body></html>' );
+});
 ```
 
-Ahora, si probamos desde el browser una URL que _no existe_, por ejemplo `http://localhost:1337/hola/como/va` obtenemos el siguiente resultado:
+En el ejemplo requerimos los archivos estáticos en `/assets/`. Ahora para mapear todos los archivos que estén en esa carpeta a una ruta dentro de `/assets` (por ejemplo: `/assets/image.jpg`) de forma automática, vamos a usar el middleware `express.static` que viene por defecto con _express_.
 
-![404-Server](./img/404server.png)
+Para agregarlo, vamos a usar la funcion `use()`, que le indica a _express_ para que use el middleware que le pasamos en el segundo parámetro, en las URL que le pasamos en el primero. Así que con lo siguiente le estamos diciendo que mapee las rutas de `/assets/` con el middelare _static_.
 
-Copado, no?
+```javascript
+app.use('/assets/', express.static(__dirname+'/public'));
+```
 
-Ya pudimos armar nuestro propio servidor con algunos endpoints. Pero no les parece que si nuestro servidor tuviera muchas endpoints el código se haría muy engorroso y díficil de mantener? Por suerte hay gente que ya se topó con estos problemas y escribieron código que les ayuda a simplificar esta tarea. Antes de ver en detalle estas librerías o frameworks, veamos primero como poder instalarlas y el concepto detrás de un gestor de paquetes [aquí](../npm).
+El único parámetro que recibe _static_ es el nombre del directorio donde están los archivos estáticos, en nuestro ejemplo están en `/public`.
+
+Ahora probemos la nueva ruta `/static/` y probemos si carga los archivos estáticos:
+
+![pagina-static](./img/expresstatic.png)
+
+Como vemos la imagen, y vemos el párrafo de color rojo, sabemos que se cargaron correctamente los archivos estáticos!
+
+Si accedemos a cada uno individualmente:
+
+![pagina-static](./img/static.gif)
+
+Vemos que cada uno tiene su propia ruta dentro de `/assets/` y que fue mapeada automáticamente por _express.static_ a cada archivo dentro de la carpeta `public`. Muy potente, no? Such express!
+
+## Nuestro propio Middleware con app.use()
+
+Vimos que los middlewares pueden ser muy potentes. Pero como hacemos para crear uno propio?
+
+_Express_ nos facilita esta tarea, ya que el callback pasamos en `app.use` tiene tres parámetros: los que ya conociamos `req` y `res` y uno nuevo, `next`. Lo que esto quiere decir es que cuando el request vaya a la ruta que especificamos en el primer argumento, en este caso `'/'`, _express_ va a ejecutar el callback, cuando encuentre la función `next()` le estamos indicando que corra el siguiente middleware, podemos pensar que todos los `app.get` que veniamos programando también son middleware, por lo tanto son esas funciones las que se ejecutaran luego.
+
+```javascript
+app.use('/', function(req,res, next ){
+	console.log('Hicieron un Request a '+ req.url);
+	next();
+});
+```
+Por lo tanto al hacer un request al servidor, primero se pasará por ese middleware (veremos el console log en la terminal) y luego se creará el response según lo que habiamos definido para esa ruta:
+
+![middleware](./img/middleware.gif)
+
+Como se podrán imaginar, esta forma de trabajar de _express_ hace que sea super potente. Además hay muchísimos middlewares ya creados por otros desarrolladores que podremos usar. ¿Donde buscarlos? Sí, en npm! También pueden empezar por esta [lista de middleware creados por el equipo de _express_](http://expressjs.com/resources/middleware.html).
+
+## Enviado datos al servidor:
+
+Por ahora nos habiamos concentado sólo en obtener contenido de nuestra app usando requests tipo __GET__, sin mandar datos nosotros (de hecho el único dato que enviamos fue como un parámetro en la URL).
+Ahora veremos que hay distintas formas de enviar datos al servidor.
+
+### Query String
+
+Una forma de enviar datos es hacerlo en la URL a la que apuntamos el request. Para ello nos valemos de una serie de parámetros o datos que se incluyen en la URL. Normalmente distinguimos en la URL por un nombre y un valor separados por el signo igual, y se separan del endpoint por el caracter `?`, y entre cada variable por el signo `&`. Por ejemplo:
+
+`www.com/index?nombredevalor1=valor1&nombredevalor2=valor2`
+
+o
+
+![query_string](./img/queryString.png)
+
+### POST y Forms
+
+Otras formas de enviar datos al servidor es a través de Formularios. Ahora usaremos otro verbo HTTP, el __POST__.
+
+![query_string](./img/postform.png)
+
+En este caso, los datos iran dentro del `body` del request, y lo que nos indica que es datos de un formulario es el  `content-type` que estará seteado a `x-www-form-urlencoded'.
+
+
+### POST y Ajax
+
+También podemos enviar datos al servidor en formato JSON, donde también usamos POST, pero el `content-type` es ahora `application/json`. Por ejemplo en un request generado por AJAX. En este caso los datos también estarán en el `body` del request.
+
+![ajax-post](./img/postajax.png)
+
+En fin, como vemos vamos a necesitar middleware para lograr procesar cada una de estas formar de recibir datos (pensando desde el lado del servidor).
+
+
+## Tomando los Datos
+
+De las anteriores, la forma más simple es tomar los parámetros enviados por el query string. Esto lo hacemos usando en nuestra ruta el objeto `req.query`. _Express_ busca y parsea el query string por si sólo y guarda los resultados en ese objeto. Veamos un ejemplo:
+
+```javascript
+app.get('/datos/', function(req, res) {
+	res.json( req.query );
+});
+```
+Corramos el servidor y probemos nuestra nueva ruta:
+
+![query-string](./img/queryString.gif)
+
+Como vemos, _Express_ toma las variables del query string y al parsearla las guarda en un objeto cuyas propiedades son el nombre de esas variables junto con sus respectivos valores.
+
+
+### Forms
+
+Ahora, si queremos tomar datos que vienen de un formulario vamos a tener que usar un middleware, porque no es algo que _express_ haga _out of the box_.
+
+Podríamos escribir el código nosotros mismos, pero ya alguien lo hizo por nosotros! El paquete que vamos a usar se llama `body-parser`, hay muchos otros paquetes que hacen lo mismo, pero este es el más común para usar con _Express_.
+Primero, vamos a instalar el paquete con `npm install body-parser --save`, y luego vamos a requerirlo en nuestra app.
+
+```javascript
+var bodyParser = require('body-parser');
+```
+
+Vamos a encontrar la documentación sobre como usarlo [aquí](https://github.com/expressjs/body-parser).
+También vamos a necesitar crear un formulario en html. Haremos que un GET en `/form` devuelva un formulario HTML simple. También creamos una nueva ruta, que reciba un POST en la misma URL.
+
+
+```javascript
+app.get('/form', function(req, res) {
+	res.send( '<html><head> \
+			<link href="/assets/style.css" rel="stylesheet"> \
+			</head><body>\
+				<form method="POST" action="/form">\
+				Nombre <input name="nombre" type="text"><br>\
+				Apellido <input name="apellido" type="text"><br>\
+				Curso <input name="curso" type="text"><br>\
+				<input type="submit">\
+				</form>\
+			</body></html>' );
+});
+
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+app.post('/form', urlencodedParser, function (req, res) {
+  res.json( req.body )
+});
+```
+
+Ahora vamos a ir a `/form` y vamos a probar submitear el formulario. Cuando hacemos el submit, el browser genera un request tipo POST, ese request será _capturado_ en la nueva ruta `.post()` que definimos, pasará por `ulrencodedParser`  y luego enviará como response el objeto `req.body`, que es donde `body-parser` guarda los datos procesados.
+
+Vamos a probarlo:
+
+![form-data](./img/form.gif)
+
+Excelente! con la ayuda de `body-parser` vamos a poder trabajar con las variables que recibiamos de un formulario.
+
+### Ajax
+
+Ok, ahora vemos el tercer escenario, en donde el cliente genera un request tipo POST que contenga datos en formato JSON.
+Si vemos la documentación de `body-parser` vemos que también tiene un parser para JSON, también creamos un nuevo endpoint bajo la ruta `/formjson`:
+
+```javascript
+var jsonParser = bodyParser.json()
+app.post('/formjson', jsonParser, function (req, res) {
+  res.json( req.body )
+});
+```
+Ahora, para poder probar este _endpoint_ y enviar datos, vamos a usar una herramienta muy útil: [__POSTMAN__](https://www.getpostman.com/), que es una app (viene como extensión de Chrome y una app para Mac) que nos permite generar todo tipos de request HTTP, y nos va a ser de gran ayuda para probar nuestros endpoint y APIs.
+
+_También probá usando un request generado desde una página con AJAX_
+
+### POSTMAN
+
+Veamos como usarlo para generar un post apuntado a `/formjson` y que envie data en formato JSON.
+
+![Postman](./img/postman.png)
+
+Como vemos en la imagen, la interfaz es bastante intuitiva, a la izquierda seleccionamos qué tipo de http request queremos hacer (en el ejemplo hicimos un GET). Especificamos la URL ('/form') en este caso, y al apretar el botón SEND se genera el request.
+Abajo podremos ver el resultado del mismo. En este caso, el servidor nos devolvió el html del formulario que habiamos creado en ese endpoint. Estos son los datos que recibe el browser cuando escribimos la URL en la barra de direcciones, pero el broswer al recibir los datos los parsea y los dibujo automáticamente, por eso vemos el formulario directamente.
+
+Ahora, queremos probar hacer un __POST__ a `/formjson`, por lo tanto vamos a cambiar la URL en postman y el tipo de request. Si probamos veremos el siguiente resultado: `{}`.
+
+![Postman](./img/postmanform.png)
+
+Lo primero que queremos saber es si el request fué procesado con éxito, sabemos que sí porque el `status` que trajo el response es el número `200`, que significa __'Todo ok'__ en el standart HTTP. También sabemos que ese endpoint nos debería devolver un JSON con los datos que hayamos enviado en el POST, como no había datos en el request, era esperable que recibamos un objeto vacío. Por lo tanto, hasta acá venimos bien.
+Intentemos agregar datos al __POST__ a ver que pasa:
+
+![Postman](./img/postman.gif)
+
+Como vemos en la imagen de arriba, para agregar datos al post tenemos que ir a la pestaña `Body`, y allí seleccionar `raw`, y como tipo de datos usar `application/json`.
+Luego completamos dentro del cuadro de texto con el objeto en formato JSON que queremos enviar (tengan cuidado con el formato, de hecho las dobles comillas con obligatorias para los nombres).
+Luego de cargar los datos, hacemos click en __Send__ y abajo vemos la respuesta, qué como habiamos dicho, tiene que ser el mismo objeto que hemos enviado. Todo funciona sin problemas!
+
+_Con POSTMAN podemos emular varios request, de hecho podríamos haber emulado el formulario con esto. Intenten hacerlo ustedes: en `Body` pueden empezar seleccionando 'x-www-form-urlencoded'. ¿Cúal es la diferencia con 'form-data'?_
+
+## Estructurando nuestra App
+
+Al hacer una app compleja, en donde van a existir muchos endpoints, se puede poner muy engorroso mantener todo en un mismo archivo. Por eso, vamos algunos patrones para mantener la aplicación lo más ordenada posible.
+
+__Esto también es muy personal, cada uno puede estructurar su aplicación de la forma que le resulte más fácil de mantener y entender. *Cuando trabajen en equipo tienen que estar de acuerdo en esto!!*__
+
+_Express_ tiene un generador de projectos (parecido al `npm init` pero más potente) llamado `express-generator`. Podemos ver su documentación [aquí](http://expressjs.com/en/starter/generator.html). Vamos a instalarlo y crear un proyecto usándolo.
+
+`npm install express-generator -g`
+`express myapp -e`
+
+Para este ejemplo he creado una app con el nombre 'myapp' y le indiqué que el template engine a usar será `EJS`.
+Veamos todos los archivos que _express-generator_ creó por nosotros:
+
+```
+create : myapp
+create : myapp/package.json
+create : myapp/app.js
+create : myapp/views
+create : myapp/views/index.ejs
+create : myapp/views/error.ejs
+create : myapp/public
+create : myapp/routes
+create : myapp/routes/index.js
+create : myapp/routes/users.js
+create : myapp/bin
+create : myapp/bin/www
+create : myapp/public/javascripts
+create : myapp/public/stylesheets
+create : myapp/public/stylesheets/style.css
+```
+
+Como vemos, se creó un `package.json` donde están listadas las dependencias de nuestro proyecto, por lo tanto lo primero que deberíamos hacer es entrar a la carpeta del proyecto y hacer un `npm install`.
+
+Ahora veamos un el archivo `app.js`. En ese archivo el generador incluyó a la app varios middleware de uso muy común (entre ellos están `bodyParser` y `express.static`).
+
+```javascript
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
+
+var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+```
+
+Nos podemos imaginar que la carpeta `/public` es donde estará todo nuestro ḿaterial estático (images, .css, .js, etc..). En la carpeta `/views` estarán los templates del projecto. Y también vemos una tercera carpeta de recursos que es la carpeta `/routes`, en ella guardaremos las rutas de cada endpoint de nuestra aplicación.
+Si investigamos un archivo autogenerados que están dentro de esa carpeta, por ejemplo `/routes/index.js` veremos que está pensado para se importado ya que tiene el `module.exports` al final.
+
+```javascript
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+module.exports = router;
+```
+
+De hecho, si volvemos a mirar `app.js` vemos que importa como módulos a los archivos dentro de `/routes`.
+
+```javascript
+var routes = require('./routes/index');
+var users = require('./routes/users');
+```
+
+Un concepto nuevo que no habiamos visto, es la función `express.Router()`, que es un middleware de _express_ para facilitarnos el uso de rutas. En vez de poner las rutas directamente en la `app` vamos a cargarlas de la misma forma pero en el `router`, luego exportamos el objeto `router` en cada archivo y dentro de `app.js` vamos requerirlo y cargalos en nuestra app:
+
+```javascript
+app.use('/', routes);
+app.use('/users', users);
+```
+
+Hay que notar que cuando usamos `app.use` y le pasamos un `Router` también le pasamos un path, esto quiere decir que las rutas definidas dentro del `Router` que les pasamos serán accesibles desde el path origin que le pasamos. Por ejemplo:
+
+Como en el archivo `routes/users.js` tenemos una ruta para el URL `/`, al cargarlo usando `app.use()` en `/users`, ese path será accesible en el path `/users/`. Para que se entienda mejor, creé una nueva ruta dentro de `users.js` con la URL `/api`, esa ruta será accesible desde `/users/api/`, ya que cargamos ese `Router` en `/users`. ;D 
