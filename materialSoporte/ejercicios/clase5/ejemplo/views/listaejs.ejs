@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prueba EJS</title>
+</head>
+<body>
+    <h1>Lista Ejs</h1>
+    <ul>
+    <% lista.forEach(function(item){ %>
+        <li><%= item %></li>
+    <% }); %>
+    </ul>
+    <hr>
+    <ol>
+    <% lista.forEach(function(item){ %>
+        <li><%= item %></li>
+    <% }); %>
+    </ol>
+    <hr>
+    <p> Usando un for </p>
+    <ol>
+        <% for(var i =0; i<lista.length; i++){ %>
+            <li><%= lista[i] %></li>
+        <% }; %>
+    </ol>   
+</body>
+</html>
