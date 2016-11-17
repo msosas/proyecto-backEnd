@@ -8,8 +8,10 @@
 
 	> Para el ejercicio dos vas a tener que usar un lazo de EJS.
 3. Pensá la forma de hacer quee los profiles se distribuyan de dos en dos. Es decir, un row contiene dos profiles.
+	
 	> Para esto vas a necesitar usar condicionales. Pensá bien en qué momento vas a tener que abrir y cerrar el div del row.
 4. Agregá un link a la página de wikipedia de cada Beatle en su perfil. Acá tenes los links:
+	
 	```javascript
 	var beatles=[{
 	  name: "John Lennon",
@@ -31,5 +33,7 @@
 	}
 	]
 	```
+
 5. Dentro del container, agregá un `<h1>` al final. Qué pasa si sacamos un beatle (digamos que Ringo) ? Donde queda ese h1? Cambiá un condicional para que la página siga quedando bien *.
+	
 	> *: Según como hayas hecho el ejericio el punto cinco puede no tener sentido :D.
