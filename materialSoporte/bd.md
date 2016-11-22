@@ -209,7 +209,7 @@ monica.save();  // Monica es clase alumno, que hereda el metodo save de mongoose
 ayelen.save( (err, result) =>{  // save tambien puede recibir un callback para poder ver si se guarda bien
 	if(err){					// o bien hacer algo cuando termine
 		console.log(err);		// este patrón va a aparece mucho en mongoose
-	}else{				`		// por ejemplo con .find() o .delete(), todas reciben un callback.
+	}else{						// por ejemplo con .find() o .delete(), todas reciben un callback.
 	console.log(result);
 	}
 });
@@ -223,13 +223,14 @@ Alumno.find({}, function(err, alumnos){
 	}
 })
 ```
+
 ### Modelos
 
-Como vimos en el ejemplo, en Moongoose tenemos que definir un `Schema`, que luego usaremos para crear nuestro `model` que finalmente va a ser el objeto que tiene toda la funcionalidad de mongoose, y cuyas instancias  van a ser los _documentos_ que terminen guardados en __Monogo__.
+Como vimos en el ejemplo, en Moongoose tenemos que definir un `Schema`, que luego usaremos para crear nuestro `model` que finalmente va a ser el objeto que tiene toda la funcionalidad de mongoose, y cuyas instancias  van a ser los _documentos_ que terminen guardados en __Mongo__.
 Seguramente se harán la pregunta de por qué hay schemas, si supuestamente `mongodb` era schemaless (o que no teníamos que definir una estructura antes de guardar datos). Si bien esto es cierto, a los desarrolladores en general les sirve tener algún tipo de esquema definido de cómo quieren que sean los objetos que trabajan y que finalmente se guardan en la bd, al tener un esquema bajamos las posibilidades que algún dato que no queremos se escriba en la BD. Por ejemplo, en el campo DNI llega un string con palabras, si tuvieramos definido un esquema diciendo que es tipo `entero` ese string nunca llegaría a la base de datos. De hecho, podemos especificar con bastante detalle cómo queremos que sean los datos:
 
 ```javascript
-var personSchema = new Schema({
+var personSchema = new mongoose.Schema({
     name: { type: String, required: true },
     age: Number,
     sex: { type: String, enum: ["M","F"] },
@@ -249,7 +250,7 @@ Existen todavía más restricciones o `constrains` que les podemos poder a nuest
 De todas formas, mongoose ofrece la funcionalidad de trabajar `schemaless`, para eso hay que declarar que un schema no es _estricto_ con el keyword `strict` seteado en false:
 
 ```javascript
-var personSchema = new Schema({ },{ "strict": false });
+var personSchema = new mongoose.Schema({ },{ "strict": false });
 Persona =  mongoose.model( "Person", personSchema );
 ```
 
@@ -276,7 +277,7 @@ Para buscar, Mongoose nos ofrece varios sabores, vamos a usar una función disti
 
 ```javascript
 // Busca  Personas con nombre 'Ghost' y trae los campos _name_ y _age_
-Persona.findOne({ 'name': 'Ghost' }, 'name age', function (err, person) {
+Persona.find({ 'name': 'Ghost' }, 'name age', function (err, person) {
   if (err) return handleError(err);
   console.log(person.name) 
 })
@@ -308,350 +309,3 @@ Persona.update({ age: { $gt: 30 } }, { viejo: true }, fn);
 Aca vamos a agregarle una variable booleana 'viejo' a todos las Personas que sean mayores de treinta. :smile:
 
 > Para poder hacer queries específicas y usar operados más generales, como por ejemplo el _greater than_ vamos a referirnos a la documentación de __Mongo__ sobre el tema, [acá](https://docs.mongodb.com/getting-started/shell/query/) la podemos ver.
-
-
-## Bases de Datos Relacionales
-
-Como habiamos visto, la alternativa a las bases de datos `NoSQL` son las bases de datos relacionales. En estas bases de datos la tablas tienen (no es obligatorio pero fuertemente recomendado) que estar normalizadas (3era forma normal). Y antes de empezar a cargar datos, tenemos que definir el modelo de datos de manera detallada, como en mongoose pero obligatoriamente!
-
-Las ventajas de usar una base de datos SQL son:
-
-* Cómo nos obliga a definir un modelo de antemano, la aplicación va a ser muy estable y dificilmente llegué un dato no deseado a la BD. El problema es que es poco flexible y hacer cambios una vez arrancado el proyecto puede ser muy costoso.
-* Estás bases de datos son transaccionales, es decir que el motor de DB nos asegura que las operaciones que hagamos van a hacerse atómicamente, es decir que jamás vamos a tener datos corruptos.
-* Es una tecnología muy estudiada, hace años que ya está estable, en contrapartida con las bases de datos NoSQL que son relativamente nuevas.
-
-## PostgreSQL
-
-Como en todo en este mundo, hay muchas opciones de bases de datos SQL. De hecho las hay pagas y gratis. Podríamos usar: MySQL, ORACLE, IBM DB2, SQL server, access, etc.
-Todas utilizan el lenguaje SQL, asi que son muy parecidas, el 80% de las cosas se puede hacer con cualquier motor. Nosotros vamos a ver en nuestro ejemplo PostgreSQL, que es una motor gratis de código abierto que tiene una comunidad muy activa. De hecho, postgre logra sacar funcionalidades antes que los motores pagos!
-
-> :pineapple: Para instalar Postgre sigan las instrucciones para su sistema operativo [acá](https://www.postgresql.org/download/).
-
-### SQL
-
-Como dijimos, vamos a interactuar con la base de datos a través de SQL. Este es un lenguaje especialmente diseñado para hacer consultas a las bases de datos relacionales. SQL es el acrónimo de Structured Query Language y es un standart mantenido por el ANSI (American National Standards Institute).
-Usando SQL vamos a poder crear tablas, buscar datos, insertar filas, borrarlas, etc..
-
-### Creando una BD y una tabla
-
-Lo primero que tenemos que hacer es crear una base de datos (la analogía con mongo es una colección). Para eso vamos a usar el Statement `Create database`.
-
-```sql
-CREATE DATABASE prueba;
-```
-![psql](./img/psql.png)
-
-> Cada Statement SQL termina en ; (punto y coma). En algunas interfaces es obligatorio.
-
-Una vez ejecutado el comando vamos a ver listada la nueva base de datos, yo esoy usando la interfaz CLI de posgre, también pueden usar alguna interfaz gráfica.
-
-Ahora vamos a crear una tabla. Usamos el statement `CREATE TABLE` que tiene la siguiente forma:
-
-```
-CREATE TABLE table_name
-(
-column_name1 data_type(size),
-column_name2 data_type(size),
-column_name3 data_type(size),
-....
-);
-```
-
-Es muy parecido a cómo definimos un schema en mongoose, no? Sí, es muy probable que mongoose se haya inspirado en esta forma de trabajar. Básicamente ponemos el nombre de la columna y luego el tipo de datos de esa columna. Podemos ver algunos tipos de datos comunes [aquí](http://www.techonthenet.com/postgresql/datatypes.php). También vamos a poder agregar [CONSTRAINS](http://www.tutorialspoint.com/postgresql/postgresql_constraints.htm) o restricciones por ejemplo:
-
-``` sql
-CREATE TABLE ciudades
-(
-	id serial PRIMARY KEY,
-	nombre varchar(255) UNIQUE
-);
-
-CREATE TABLE personas
-(
-	id serial PRIMARY KEY,
-	apellido varchar(255) NOT NULL,
-	nombre varchar(255) UNIQUE,
-	ciudad integer references ciudades (id)
-);
-```
-
-Con este statement hemos creado dos tablas. La primera es ciudad, que cuenta con ID que tiene la constraint que es PRIMARY KEY, es decir que tiene que ser única y no puede ser nula, y ademas tiene una columna nombre que es de tipo texto (varchar) y tiene la constraint `UNIQUE`, por lo tanto no puede haber dos iguales en la misma tabla.
-
-La segunda es la tabla personas, vemos que tambien tenemos un id que es `PRIMARY KEY` (esta práctica es muy común y muy recomendable), tenemos nombre y apellido, con la condicción que nombre no se repita (es sólo para el ejemplo) y pusimos una columna que se llama ciudad, que hace referencia a un `ID` de la tabla _ciudades_. Esto último denota una _relación_ entre las tablas, y lo hicimos de esta forma para respetar la normalización y de esa forma reducir el tamaño final de la base de datos. Más adelante veremos como hacer queries y obtener los datos de una relación.
-
-Ahora agregamos algunos datos en las tablas. Tenemos que empezar por ciudades, ya que para cargar una persona luego (y mantener la __integridad referencial__) vamos a tener que tener algunas ciudades y sus ids.
-Para insertar datos vamos a usar el statement `INSERT INTO`:
-
-```sql
-INSERT INTO table_name (column1,column2,column3,...)
-VALUES (value1,value2,value3,...);
-```
-Insertemos tres ciudades:
-
-```sql
-INSERT INTO ciudades (nombre)
-VALUES ('Tucuman');
-
-INSERT INTO ciudades (nombre)
-VALUES ('Buenos Aires');
-
-INSERT INTO ciudades (nombre)
-VALUES ('New York');
-```
-
-> El tipo de datos SERIAL (el id) es un entero AUTOINCREMENTAL, es decir que no tengo que especificar el ID, si no que se va generando solo. El primero es 1, el segundo 2 y así sucesivamente.
-
-Perfecto ahora tenemos ciudades!
-Insertemos algunas personas que sean de esas ciudades!
-
-```sql
-INSERT INTO personas (nombre, apellido, ciudad)
-VALUES ('Toni', 'Tralice', 1);
-
-INSERT INTO personas (nombre, apellido, ciudad)
-VALUES ('Guille', 'Aszyn', 3);
-
-INSERT INTO personas (nombre, apellido, ciudad)
-VALUES ('Santi', 'Scanlan', 2);
-```
-
-:smile:
-Ahora tenemos tablas con datos, pero cómo los consultamos?
-
-#### SELECT, WHERE, ORDER BY
-
-Para recuperar datos usamos el statement `SELECT` de esta forma:
-
-```
-SELECT column_name,column_name
-FROM table_name;
-```
-
-Para recuperar todas las personas:
-
-```sql
-SELECT * FROM personas;
-```
-
-y todas las ciudades:
-
-```sql
-SELECT * FROM ciudades;
-```
-
-![resultado](./img/tablas.png)
-
-> El asterisco quiere decir 'todas las columnas'.
-
-Genial, esto sería equivalente al `db.prueba.find()` de mongo!
-Las filas en SQL no tiene un orden dado, ni siquiere por el orden en el que fueron creadas (muchas veces coincide pero no es necesariamente así), asi que si queremos tener los resultados ordenados vamos a usar la cláusla `ORDER BY`, esta va al final del query y le especificamos en qué columna se tiene que fijar para ordenar:
-
-```sql
-SELECT * FROM ciudades
-ORDER BY nombre;
-```
-
-El motor se da cuenta el tipo de datos de la columna y los ordena en base a eso. también podemos especificar que ordene por más de un campo, y si queremos que sea en orden ascendente o descendiente:
-
-```sql
-SELECT * FROM ciudades
-ORDER BY nombre, id DESC;
-```
-
-Ahora veamos como buscar o filtrar filas: para eso vamos a usar la claúsula `WHERE`:
-
-```sql
-SELECT column_name,column_name
-FROM table_name
-WHERE column_name operator value;
-```
-
-Por ejemplo, busquemos todas las personas que se llaman 'Toni':
-
-```sql
-SELECT * FROM personas
-WHERE nombre = 'Toni';
-```
-
-Casi que podemos leerlo en lenguaje natural: 'Seleccioná todas las columnas de la tabla personas donde el nombre sea Toni'. :smile:
-
-Podemos agregar más de una condicion:
-
-```sql
-SELECT * FROM personas
-WHERE nombre = 'Toni'
-AND apellido = 'Tralice';
-```
-
-Ahora, si vemos el output de consultar la tabla 'personas', vemos que tenemos el _código_ de ciudad, pero no el nombre. Y probablemente en nuestra aplicación querramos mostrar el nombre y no el código, no?
-Bien, entonces para hacerlo podríamos consultar ambas tablas, y luego buscar el código de cada fila de _personas_ en la tabla _ciudades_. De esa forma tendriamos el nombre asociado... por suerte SQL ya viene preparado para eso! con el statement `JOIN`.
-
-#### JOINS
-
-La cláusula `JOIN` nos sirve para combinar filas de una tabla con otras de otra tabla, basándonos en un campo que tengan en común. Es el caso de ciudad y personas, vamos a unir las filas de cada tabla basados en el ID de la ciudad.
-
-Para definir un JOIN tenemos que decis qué tablas queremos unir y en base a qué campos, para lo primero ponemos el nombre de la tabla a unir después del `JOIN` y  lo segundo lo hacemos con el parámetro `ON`:
-
-```sql
-SELECT * FROM personas
-JOIN ciudades 
-	ON ciudades.id = personas.ciudad;
-```
-
-Básicamente estamos diciendo: 'Seleccioná todas las columnas de la tabla personas y uní todas las filas con la tabla ciudades donde el id de ciudades sea igual al campo ciudad de personas.'.
-
-El resultado:
-
-![joindeTablas](./img/jointablas.png)
-
-Podemos reescribir la consulta de esta forma:
-
-```sql
-SELECT p.nombre, p.apellido, c.nombre FROM personas p
-JOIN ciudades  c
-	ON c.id = p.ciudad;
-```
-
-Ahora sólo pedimos el nombre, apellido de las personas y el nombre de la ciudad. Como `nombre` está en las dos tablas, tenemos que especificar de qué tabla es la columna. Para no escribir todo el nombre completo, podemos definir un ALIAS en la consulta, en esta caso a __personas__ le dimos el alias `p` y a __ciudades__ el alias `c`.
-
-![TablaconJoin2](./img/jointabla2.png)
-
-Según el tipo de union que queremos hacer vamos a usar alguno de estos tipos de `JOINS`:
-
-![JOINS](./img/SQL_Joins.png)
-
-> Los joins pueden ser operaciones muy costosas, de hecho, las bases de datos no relacionales suelen ser tan performantes porque esquivan los JOINS, logran ser más rápidas, pero ocupando más espacio.
-
-## ORM
-
-Un problema con las bases de datos relacionales ( puede ser un gran problema en proyectos complejos ) es que las cosas que guardamos en ella no mapean uno a uno a los objetos que tenemos en nuestra aplicación. De hecho, es probable que en nuestra App tengamos la clase _persona_, pero dificilmente tengamos la clase _ciudad_ y que ambas estén relacionadas. Simplemente tendríamos una propiedad _ciudad_ dentro de _persona_.
-Por lo tanto vamos a necesitar alguna capa de abstracción que nos oculte la complejidad de las tablas y sus relaciones y nosotros sólo veamos objetos desde la app. Para eso existen los __ORM__ (Object relation mapping), que son librerías o frameworks que hacen este trabajo por nosotros. Sería lo mismo que `mongoose`, pero un poco al revés!
-
-### SEQUELIZE
-
-Obviamente existen un montón de ORMs (de estos de verdad hay miles porque se vienen usando hace mucho). Nosotros vamos a utilizar `sequelize`, en particular. Este es un ORM para nodejs que soporta varios motores de bases de datos:
-
-* PostgreSQL
-* MySQL
-* MariaDB
-* SQLite
-* MSSQL (Microsoft)
-
-Por supuesto que ustedes deben probar y jugar con varios de ellos hasta que encuentren alguno que se acomode a su filosofía de programación, no hay _uno_ que sea el mejor de todos.
-
-> Hay otras librerías que no llegan a ser ORMs pero nos ayudan a hacer queries a la base de datos, si les gusta tener el control al 100% de su base de datos le recomiendo probar con algunos de estos, por ejemplo: [MassiveJS](https://github.com/robconery/massive-js)
-
-#### Instalación
-
-Como `sequelize` soporta varias bases de datos, vamos a necesitar primero instalar el módulo de `sequelize` per ser, y luego el módulo del conector a la base de datos que vayamos a usar. `sequelize` hace uso de estos últimos para conectarse a la base de datos.
-
-```
-$ npm install --save sequelize
-
-# y uno de los siguientes
-$ npm install --save pg pg-hstore
-$ npm install --save mysql // Para MySQL y MariaDB
-$ npm install --save sqlite3
-$ npm install --save tedious // MSSQL
-```
-
-Igual que con Mongoose, primero vamos a importar el módulo y vamos a crear un objeto `Sequelize` pasandole como parámetro la string que indica a qué base de datos conectarse, con qué usuario y qué password:
-
-```javascript
-var Sequelize = require("sequelize"); //requerimos el modulo
-var sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
-```
-
-#### Modelos
-
-Sequelize es muy parecido a Mongoose, primero vamos a tener que definir un modelo (las constrains y tipos de datos puedem difereir, pero el concepto es el mismo), los modelos se definen de la forma: `sequelize.define('name', {attributes}, {options}).`, veamos un ejemplo:
-
-```javascript
-var User = sequelize.define('user', {
-  firstName: {
-    type: Sequelize.STRING,
-    field: 'first_name' //el nombre en la base de datos va a ser first_name
-  },
-  lastName: {
-    type: Sequelize.STRING
-  }
-});
-
-User.sync({force: true}).then(function () { //tenemos que usar este método porque 
-  // Tabla creadas 							// antes de guardar datos en las tablas
-  return User.create({						// estas tienen que estar definidas
-    firstName: 'Guille',
-    lastName: 'Aszyn'
-  });
-});
-```
-
-A diferencia de Mongoose, con sequelize vamos a tener que preocuparnos un poco por las tablas que haya en nuestra base de datos, ya que sin no hay tablas creadas, no vamosa poder guardar datos ( en mongodb nos creaba las colecciones solo, y no importaba la estructura para guardar documentos). Por eso usamos el método `sync()` que justamente sincroniza el modelo que tenemos en nuestra app con la BD (crea la tabla en la db si no existe), como vemos puede recibir un _callback_, en el cual usamos el método `create()` para crear un nuevo user y guardarlo en la tabla. Podemos ver más métodos y cómo funcionan en la [Documentación](http://sequelize.readthedocs.io/en/latest/api/model/).
-
-> Fijense que en Sequelize para pasar un callback lo hacemos en la función `.then()`, eso es una promesa, por ahora usenlo como una callback normal, más adelante las veremos en detalle.
-
-### CRUD ( Create, Read, Update, Delete)
-
-Para insertar datos en la base de datos, vamos a usar la función [create()](http://sequelize.readthedocs.io/en/latest/api/model/#createvalues-options-promiseinstance), que báscicamente lo que hace es crear una nueva instacia del modelo y lo guarda en la base de datos:
-
-```javascript
-User.create({
-  firstName: 'Juan',
-  lastName: 'Prueba'
-}).then(function(user) {
-  console.log(user);
-})
-```
-
-La función `create()` en realidad, encapsula dos comportamiento, como dijimos arriba: instanciar el modelo  y guardar en la bd. De hecho, podríamos hacer ambas cosas por separado, usando la función `build()` y `save()`:
-
-```javascript
-var user = User.build({
-  firstName: 'Juan',
-  lastName: 'Prueba'
-})
-
-user.save().then(function(user) {
-  console.log(user);
-})
-```
-
-Para buscar registros usamos la función [find](http://sequelize.readthedocs.io/en/latest/api/model/#findalloptions-promisearrayinstance), que viene en distintos sabores: [`findAll()`](http://sequelize.readthedocs.io/en/latest/docs/models-usage/#findall-search-for-multiple-elements-in-the-database): Sirve para buscar múltiples registros, `findOne()`: sirve para buscar un sólo registro y `findByID()`: es igual a _findOne()_ pero podemos buscar sólo por el ID del registro.
-
-```javscript
-User.findAll({ where: ["id > ?", 25] }).then(function(users) {
-  console.log(users)   //busca TODOS los usuarios
-});
-
-User.findOne({
-  where: {firsname: 'Toni'},
-  attributes: ['id', ['firstname', 'lastname']]
-}).then(function(user) {
-  console.log(user)
-});
-
-User.findbyId(2).then(function(user) {
-  console.log(user)   //El user con ID 2
-});
-```
-> Las búsquedas pueden ser más complejas que en Mongo, por la naturaleza de las relaciones, por lo tanto es importante que leamos bien la [documentación](http://sequelize.readthedocs.io/en/latest/docs/models-usage/#data-retrieval-finders).
-
-Para modificar un registro, o varios, tenemos que pasarle los nuevos atributos que queremos modificar, y además una condición de búsqueda, en este caso voy a cambiarle el nombre a todos los registros que tengan `id` =1 (sólo puede haber uno :smile: ):
-
-```javascript
-User.update({
-  firstname: 'Martin' ,
-}, {
-  where: {
-    id: '1'
-  }
-});
-```
-
-Para borrar un registro, vamos a usar el método `destroy()`, que tambien recibe un parámetro de búsqueda, en el ejemplo vamos a borrar todos los registros que tengan id 1, 2 ,3 o 4:
-
-```javascript
-User.destroy(
-	{ where: { id: [1,2,3,4] }
-	});
-```

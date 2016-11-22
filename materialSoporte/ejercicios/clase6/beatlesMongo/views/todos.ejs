@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Beatles</title>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css'>
+	<style>
+		img {
+			height: 300px;
+			width: ``
+		}
+	</style>
+</head>
+<body>
+	<div class='container'>
+			<h1>Todos los Beatles juntos</h1>
+			<% for(var i =0; i<beatles.length; i++){ %>
+				<% if (!(i%2)) { %>
+	        		<div class='row'>
+				<% } %>
+	        		<div class="five columns">
+		    			<h3><%= beatles[i].name %></h3>
+		    			<img class='u-max-full-width' src=<%= beatles[i].profilePic %>>
+		    			<p><%= beatles[i].name %> es un beatle que nació en <%= beatles[i].birthdate %> y su cara es la de arriba.</p>
+	    				<a href= <%= beatles[i].wiki %>> Wikipedia</a>
+	    			</div>
+    			<% if (i%2 || i == beatles.length -1 ) { %>
+	        		</div>
+				<% } %>
+    		<% }; %>
+    		<h1>Plataforma 5</h1>
+	</div>
+
+
+</body>
+</html>

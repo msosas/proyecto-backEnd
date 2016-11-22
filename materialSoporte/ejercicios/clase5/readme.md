@@ -22,7 +22,7 @@
 	{
 	  name: "Paul McCartney",
 	  birthdate: "18/06/1942",
-	  profilePic:"http://gazettereview.com/wp-content/uploads/2016/06/paul-mccartney.jpg",
+	  profilePic:"http://gazettereview.com/wp`-content/uploads/2016/06/paul-mccartney.jpg",
 	  wiki: 'https://en.wikipedia.org/wiki/Paul_McCartney'
 	},
 	{
