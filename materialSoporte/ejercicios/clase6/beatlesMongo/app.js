@@ -7,10 +7,10 @@ mongoose.connect("mongodb://localhost/beatles");
 
 //###########
 
-var beatlesSchema = require('./models.js').beatlesSchema;
-var preguntasSchema = require('./models.js').preguntasSchema;
-var visitasSchema = require('./models.js').visitasSchema;
-var logSchema = require('./models.js').logSchema;
+var beatlesSchema = require('./models/beatles.js');
+var preguntasSchema = require('./models/preguntas.js');
+var visitasSchema = require('./models/visitas.js');
+var logSchema = require('./models/log.js');
 
 var Beatles = mongoose.model('beatles', beatlesSchema);
 var Preguntas = mongoose.model('preguntas', preguntasSchema);
