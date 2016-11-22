@@ -4,7 +4,7 @@
 
 Vamos a pasar todo lo que sea datos afuera de NodeJS y lo vamos a guarda en Mongo.
 
-1. Diseña todos los Schemas que vas a necesitar. Guardalos en un archivo que se llame `models.js`. Empezá por el arreglo de los beatles, luego el de contar visitas.
+1. Diseña todos los Schemas que vas a necesitar. Guardalos en un archivo que se llame `models.js`. Empezá por el arreglo de los beatles, luego el de contar visitas y preguntas. Pensá bien como van a ser sus `Schemas` antes de empezar a codear.
   ```javascript
   var beatles=[{
     name: "John Lennon",
@@ -29,4 +29,5 @@ Vamos a pasar todo lo que sea datos afuera de NodeJS y lo vamos a guarda en Mong
   ]
   ```
 
-2. Agregá un MiddleWare que guarda un documento nuevo en una coleccion llamada `log`. Cada documento deberá tener información sobre el request que se hizo a tu server. Fijate [acá](http://expressjs.com/en/api.html#req) toda la info que ya tenés en `req`.
+2. Agregá una nueva ruta DELETE en la que puedas remover un Beatle de tu coleccion por su nombre. ej: `DELETE /api/George%20Harrison` -> Remueve a George de los Beatles.
+3. Agregá un MiddleWare que guarda un documento nuevo en una coleccion llamada `log`. Cada documento deberá tener información sobre el request que se hizo a tu server. Fijate [acá](http://expressjs.com/en/api.html#req) toda la info que ya tenés en `req`.

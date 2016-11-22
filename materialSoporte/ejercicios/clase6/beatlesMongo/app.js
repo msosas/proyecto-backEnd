@@ -108,6 +108,17 @@ app.post('/api/add', jsonParser, function (req, res) {
   })
 });
 
+app.delete('/api/:name', jsonParser, function (req, res) {
+  Beatles.remove({name: req.params.name}, function(err, removed){
+    if(err) return res.send(err);
+    if(!removed.result.n){
+      res.send('No se borro ninguno');
+    }else{
+      res.send('Se borró ' + req.params.name);
+    }
+  })
+});
+
 // PROBAR CON POSTMAN
 // {
 // "name":"Toni",
