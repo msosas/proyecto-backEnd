@@ -18,7 +18,6 @@ var personSchema = new mongoose.Schema({
 var Persona =  mongoose.model( "Person", personSchema );
 
 
-
 var santi = new Persona({ name: 'Santi', age : 29  });
 
 santi.save(function (err) {

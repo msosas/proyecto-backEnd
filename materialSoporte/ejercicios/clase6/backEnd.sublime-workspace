@@ -1,0 +1,644 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pre",
+				"preguntasSchema"
+			],
+			[
+				"para",
+				"params"
+			],
+			[
+				"bea",
+				"beatlesSchema"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"pro",
+				"profilePic"
+			],
+			[
+				"b",
+				"birthdate"
+			],
+			[
+				"beat",
+				"beatles"
+			],
+			[
+				"bat",
+				"beatles"
+			],
+			[
+				"car",
+				"car_factory"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"box",
+				"box-sizing"
+			],
+			[
+				"check",
+				"checkbox"
+			],
+			[
+				"margi",
+				"margin-top"
+			],
+			[
+				"u",
+				"unset"
+			],
+			[
+				"Form",
+				"FormField"
+			],
+			[
+				"RE",
+				"ReactRouter"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"padd",
+				"padding-right"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/atralice/Projects/Plataforma5/Bootcamp/BackEnd/REST/readme.md",
+			"settings":
+			{
+				"buffer_size": 6197,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/atralice/Projects/Plataforma5/Bootcamp/BackEnd/UnitTesting/README.md",
+			"settings":
+			{
+				"buffer_size": 16651,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 98.0,
+		"last_filter": "save as",
+		"selected_items":
+		[
+			[
+				"save as",
+				"Project: Save As"
+			],
+			[
+				"previre",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"pre",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"preview",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"proje",
+				"Project: Save As"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"git push",
+				"Git: Push Current Branch"
+			],
+			[
+				"git com",
+				"Git: Commit"
+			],
+			[
+				"git comim",
+				"Git: Commit"
+			],
+			[
+				"git add ",
+				"Git: Add All"
+			],
+			[
+				"git commit ",
+				"Git: Commit"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"git ",
+				"Package Control: Install Package"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"mard",
+				"Set Syntax: Markdown"
+			],
+			[
+				"h",
+				"Snippet: html"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"jsva",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"htm",
+				"Set Syntax: HTML"
+			],
+			[
+				"ht",
+				"Set Syntax: HTML"
+			],
+			[
+				"jav",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"snip",
+				"Snippet: html"
+			],
+			[
+				"set syntcss",
+				"Set Syntax: CSS"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"co",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"mar",
+				"Set Syntax: Markdown"
+			],
+			[
+				"mark",
+				"Set Syntax: MultiMarkdown"
+			]
+		],
+		"width": 539.0
+	},
+	"console":
+	{
+		"height": 132.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+	],
+	"file_history":
+	[
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/mongo/index.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/log.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/preguntas.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/visitas.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/beatles.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/bd.md",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/mongo/find.js",
+		"/home/atralice/Projects/Plataforma5/Bootcamp/reactsJs/README.md",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase5/beatlesTemplate/views/form.ejs",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase5/beatlesTemplate/views/profile.ejs",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase5/ejemplo/index.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase5/ejemplo/views/index.ejs",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase5/ejemplo/views/testejs.ejs",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase5/ejemplo/views/listaejs.ejs",
+		"/home/atralice/Projects/Plataforma5/Bootcamp/reactsJs/ejemplo/reactHtml.html",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase4/Beatles.md",
+		"/home/atralice/Projects/Plataforma5/Bootcamp/reactsJs/ejemplo/reactWebpack/index.html",
+		"/home/atralice/Projects/Plataforma5/Bootcamp/reactsJs/ejemplo/reactWebpack/index.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase3/myapp/routes/index.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase3/myapp/views/index.ejs",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase3/myapp/bin/www",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase3/myapp/routes/users.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase3/myapp/views/index.html",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase3/myapp/views/libros.html",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase3/myapp/views/new.html",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase3/myapp/views/verTodo.html",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase3/myapp/views/discos.html",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/clases/clase2/eventos.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/clases/clase2/alumnos.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/clases/clase2/emitter.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/clases/clase2/test.js",
+		"/home/atralice/Downloads/random2-2.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/npm.md",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase2/eventEmitter.md",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase2/emitter.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/eJercicios/clase2/test.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/eJercicios/clase2/eventEmitter.md",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/eJercicios/clase2/emitter.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/clases/clase1/app.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/modulos.md",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/app.js",
+		"/home/atralice/Projects/Plataforma5/Bootcamp/Node/JavaScript/oop.text",
+		"/home/atralice/Downloads/Takeout/Location History/loc.json",
+		"/run/media/atralice/storage/otros/WeirdParts/contenido.txt",
+		"/home/atralice/Cursos/modulo4/clase3/OrientadoaObjetos.js",
+		"/home/atralice/Cursos/modulo4/clase3/repaso.md",
+		"/home/atralice/Cursos/modulo4/clase2/underscore.html",
+		"/home/atralice/Cursos/modulo4/clase2/repaso.md",
+		"/home/atralice/Projects/Devs/sitioBrendans/public/stylesheets/pagina.css",
+		"/home/atralice/Projects/Devs/sitioBrendans/public/stylesheets/style.css",
+		"/home/atralice/Projects/Devs/sitioBrendans/views/primario/catequesis.ejs",
+		"/home/atralice/Projects/Devs/sitioBrendans/views/partials/header.ejs",
+		"/home/atralice/Projects/Devs/sitioBrendans/views/primario/objetivos.ejs",
+		"/home/atralice/Projects/Devs/sitioBrendans/views/home/landing.ejs",
+		"/home/atralice/Projects/Devs/sitioBrendans/app.js",
+		"/home/atralice/Projects/Devs/sitioBrendans/views/primaria/catequesis.ejs",
+		"/home/atralice/Projects/Devs/sitioBrendans/public/javascripts/main.js",
+		"/home/atralice/Projects/Devs/sitioBrendans/views/convenios/argentina.ejs",
+		"/home/atralice/Downloads/chule.html",
+		"/home/atralice/Downloads/chule,html",
+		"/home/atralice/Cursos/modulo3/Clase3/ArrayDuplcatorCombinerPlucker.js",
+		"/home/atralice/Cursos/modulo3/Clase2/repaso.md",
+		"/home/atralice/Cursos/modulo3/Clase3/repaso.md",
+		"/home/atralice/Cursos/modulo3/Clase2/showme.html",
+		"/home/atralice/Cursos/modulo3/Clase2/showmeThis.html",
+		"/home/atralice/Cursos/modulo2/Clase3/repaso.md",
+		"/home/atralice/Cursos/modulo2/Clase3/ejemplo.html",
+		"/home/atralice/Cursos/modulo2/Clase2/repaso.md",
+		"/home/atralice/Projects/Devs/sincoClient/.gitignore",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/responsable/ResponsablePerfil.js",
+		"/home/atralice/Cursos/modulo1/clase5/componente.html",
+		"/home/atralice/Cursos/modulo1/clase5/minimal/estilos.css",
+		"/home/atralice/Cursos/modulo1/clase5/repaso.md",
+		"/home/atralice/Cursos/modulo1/clase5/float.html",
+		"/home/atralice/Cursos/modulo1/clase5/minimal/ejemplo1.html",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/layout/Navbar.js",
+		"/home/atralice/Projects/Devs/sincoClient/app/styles/main.css",
+		"/home/atralice/Projects/Devs/sincoClient/app/styles/elemental.min.css",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/layout/Layout.js",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/layout/Footer.js",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/layout/Navbar.scss",
+		"/home/atralice/Projects/Devs/sincoClient/app/styles/footer.scss",
+		"/home/atralice/Projects/Devs/sincoClient/app/styles/footer.ccss",
+		"/home/atralice/Projects/Devs/sincoClient/webpack.config.js",
+		"/home/atralice/Projects/Devs/sincoClient/app/containers/NavbarContainer.js",
+		"/home/atralice/Projects/Devs/sincoClient/app/config/routes.js",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/login/Login.js",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/layout/Layout.ccss",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/login/UserInfo.js",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/layout/Header.js",
+		"/home/atralice/Projects/Devs/sincoClient/app/pages/index.html",
+		"/home/atralice/Projects/Devs/sincoClient/.babelrc",
+		"/home/atralice/Cursos/modulo1/clase4/pseudo.html",
+		"/home/atralice/Cursos/modulo1/clase4/formularios.html",
+		"/home/atralice/Cursos/modulo1/clase4/float.html",
+		"/home/atralice/Cursos/modulo1/clase4/position.html",
+		"/home/atralice/Cursos/modulo1/clase4/posicionamiento.html",
+		"/home/atralice/Cursos/modulo1/clase3/cottagegarde.html",
+		"/home/atralice/Cursos/modulo1/clase3/estilos.css",
+		"/home/atralice/Cursos/modulo1/clase3/borderbox.html",
+		"/home/atralice/Cursos/modulo1/clase3/modelocaja.html",
+		"/home/atralice/Cursos/modulo1/clase3/ejemploInline.html",
+		"/home/atralice/Cursos/modulo1/clase3/blogpost.html",
+		"/home/atralice/Cursos/modulo1/clase3/blog2.html",
+		"/home/atralice/Cursos/guille/modulo1/clase3/guille/styles.css",
+		"/home/atralice/Cursos/modulo1/clase3/repaso.md",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/Footer.js",
+		"/home/atralice/Projects/Devs/sincoClient/package.json",
+		"/home/atralice/Projects/Devs/sincoClient/app/index.html",
+		"/home/atralice/Projects/Devs/sincoClient/app/styles/footer.css",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/Header.js",
+		"/home/atralice/Projects/Devs/sincoClient/app/components/Layout.js",
+		"/home/atralice/Cursos/modulo1/clase2/style.html",
+		"/home/atralice/Cursos/modulo1/clase2/estilosInicio.html",
+		"/home/atralice/Cursos/modulo1/clase2/outline.md",
+		"/home/atralice/Cursos/modulo1/clase2/estilosFinal.html",
+		"/home/atralice/Cursos/modulo1/clase1/bio.txt",
+		"/home/atralice/Cursos/modulo1/clase1/bio.rtf",
+		"/home/atralice/Cursos/modulo1/clase1/bio.md",
+		"/home/atralice/Cursos/modulo1/clase1/prueba.html",
+		"/home/atralice/Downloads/credentials (1) (1).csv",
+		"/home/atralice/Projects/Plataforma5/Node/Proyecto/README.md",
+		"/home/atralice/Projects/Plataforma5/Node/databases/README.md",
+		"/home/atralice/.config/sublime-text-3/Packages/User/Markdown.sublime-settings"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"readme.md",
+			"people",
+			"chema",
+			"item",
+			"fs",
+			")",
+			"date",
+			"this.props",
+			"users",
+			"babel",
+			"jsx",
+			"js",
+			".\n",
+			"invoca",
+			"listener",
+			"type",
+			"!\n",
+			"this",
+			"primario",
+			"../image/fotos/pri/chicas/",
+			"member",
+			"../image/fotos/cate/",
+			"secundario/",
+			"roll",
+			"rolle",
+			"links",
+			"video",
+			"filter",
+			"/contacto",
+			"contacto",
+			"bootcamp",
+			"contacto/",
+			"bootcamp",
+			"pipedrive.deals",
+			"stage_id",
+			"props",
+			"onChange",
+			"brand",
+			";\n",
+			"#1385e5",
+			"a{",
+			"color:",
+			"hover",
+			"class=",
+			"nav",
+			"class=",
+			"dev",
+			"class=",
+			"  "
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"beatles[i]",
+			"callback",
+			"evento",
+			"/images/inner/primario/requisitos/",
+			"/images/inner/primario/catequesis/",
+			"primario/",
+			"className="
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/atralice/Projects/Plataforma5/Bootcamp/BackEnd/REST/readme.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6197,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6196,
+								6196
+							]
+						],
+						"settings":
+						{
+							"parser": null,
+							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
+							"target": "disk"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2534.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/atralice/Projects/Plataforma5/Bootcamp/BackEnd/UnitTesting/README.md",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 16651,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 750.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 32.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 136.0
+	},
+	"pinned_build_system": "",
+	"project": "backEnd.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 521.0,
+		"last_filter": "react",
+		"selected_items":
+		[
+			[
+				"react",
+				"~/Projects/Plataforma5/Bootcamp/reactsJs/react.sublime-project"
+			],
+			[
+				"",
+				"~/Projects/Devs/sincoClient/sincoClient.sublime-project"
+			]
+		],
+		"width": 396.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 305.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

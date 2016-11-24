@@ -66,7 +66,7 @@ app.get('/api/:name', function(req,res){
   Beatles.findOne({'name': req.params.name}, {'_id': 0}, function(err, doc){
     if(err) return console.log('Errorrr!!!');
     if(doc) return res.send(doc)
-    return res.send('no existe ese Beatle');
+    res.send('no existe ese Beatle');
   })
 });
 
