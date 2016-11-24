@@ -3,7 +3,7 @@
 Vamos a diseñar todos los modelos y las rutas y las vistas que va a tener nuestro Proyecto Final.
 El diseño de las rutas tiene que estar basado en la arquitectura REST.
 
-> Vamos a armar toda la aplicación pensando en un sólo usuario, luego vamos a aprender autenticación de usuario y vamos a agregar registro y logeo de usuario.
+> Vamos a armar toda la aplicación pensando en un sólo usuario, luego vamos a aprender métodos de autenticación y vamos a agregar registro y logeo de usuario.
 
 Modelos:
 * Producto: Cada producto deberá tener:
@@ -13,9 +13,9 @@ Modelos:
     - Stock.
     - Imagen.
     - Disponible: Verdadero si el Stock es > 0.
-    - Autor: Personas que creó el producto.
+    - Autor: Usuario que creó el producto.
 * Comentarios:
-    - Autor.
+    - Autor, el autor va a ser un usuario.
     - texto.
     - fecha.
 * Usuarios:
@@ -25,6 +25,8 @@ Modelos:
     - Sexo.
     - Email.
     - Lugar de nacimiento.
+
+> Cuando diseñen modelos, primero piensen en términos abstractos como deberían ser y cómo se relacionan entre ellos. Una vez que lo tengan pensado esto, vean como lo codean con el stack que tienen a mano, si hay algo que no saben lo buscan!
 
 Vistas:
 * __Index__: Página Principal:

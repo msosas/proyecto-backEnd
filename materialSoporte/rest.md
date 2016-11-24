@@ -35,13 +35,6 @@ Rest es una estilo arquitectura o forma de diseñar el backend de una aplicació
 
 Como sabemos, HTTP es un protocolo basado en el modelo cliente servidor, quienes intercambian mensajes basados en ciertas acciones. Por ejemplo, un mensaje HTTP tipo GET realizado a la URL `http://example.com/`.
 
-está basado en recursos y no en acciones.
-
-Vamos a ver
-
-# Concepto
-
-
 # Características
 
 ## Cliente - Servidor
