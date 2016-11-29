@@ -309,3 +309,79 @@ Persona.update({ age: { $gt: 30 } }, { viejo: true }, fn);
 Aca vamos a agregarle una variable booleana 'viejo' a todos las Personas que sean mayores de treinta. :smile:
 
 > Para poder hacer queries específicas y usar operados más generales, como por ejemplo el _greater than_ vamos a referirnos a la documentación de __Mongo__ sobre el tema, [acá](https://docs.mongodb.com/getting-started/shell/query/) la podemos ver.
+
+## Relaciones
+
+En varias ocasiones cuando modelamos, nos damos cuenta que existen relaciones entre _entidades_, por ejemplo: Si estoy modelando una escuela y tengo las entidades __curso__ y __alumnos__ podemos imaginar que habrá un relacion entre los dos. De hecho, un __curso__ puede tener varios __alumnos__ dentro. Veamos como diagramar esto con __mongoose__:
+
+```javascript
+var mongoose = require("mongoose")
+
+var AlumnoSchema = new mongoose.Schema({
+  nombre: { type: String, required: true},
+  apellido: { type: String, required: true},
+  date: { type: Date, default: Date.now }
+})
+
+var CursoSchema = new mongoose.Schema({
+  alumnos: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Alumnos"
+    }],
+  nombre: String,
+  date: { type: Date, default: Date.now }
+})
+```
+
+Como vemos en el ejemplo, el _Schema_ Alumnos lo hemos construido de manera normal, con los datos y validaciones necesarias. Ahora, para el de _Curso_ hemos agregado un tipo de datos nuevo llamado `ObjectID`, este tipo de datos no es _nativo_ de JavaScript por lo que lo vamos a encontrar en `mongoose.Schema.Types.ObjectId`, como se pueden imaginar este tipo de datos hace referencia a un `ID` de MongoDB. Además tenemos que aclarar a qué otro Schema hace referencia, eso lo hacemos escribiendo el nombre del mismo en la propiedad `ref`. Por lo tanto, y como lo encerramos entre `[]`, cada curso va a tener un arreglo de alumnos (definidos en su propio Schema).
+
+Ahora veamos como hacer queries a esos datos.
+
+## Population
+
+No existen `joins` en MongoDb, pero a veces es necesario traer los datos de las relaciones de ciertos Schemas. Por ejemplo, yo quiero saber todos los nombres y apellidos de los _Alumnos_ del _Curso_ `1ero B`. Acá es donde aparece el concepto de __population__.
+
+__Population__ es el proceso de reemplazar automáticamente los paths especificados en un _documento_ con los datos de otros _documentos_ de otras _colecciones_. 
+
+
+```javascript
+
+var Curso  = mongoose.model('Cursos', CursoSchema);
+var Alumno = mongoose.model('Alumnos', AlumnoSchema);
+
+var juan = new Alumno({  nombre: 'Juan', apellido: 'Perez' });
+var martin = new Alumno({ nombre: 'Martin', apellido: 'Perez' });
+
+
+var cur = new Curso({
+    nombre: "1ero B",
+    alumnos: [juan, martin]
+  });
+
+juan.save(function (err) {
+  if (err) return handleError(err);
+  martin.save(function (err) {
+    if (err) return handleError(err);
+    // listo!
+    cur.save(function (err) {
+        if (err) return handleError(err);
+        // listo!
+      });
+  });
+
+});
+```
+
+> El atributo __ref__ es el que le dice a Mongoose con qué _collection_ popular.
+
+Por ahora sólo hemos creado dos _Alumnos_ y un _Curso_, ahora vamos a hacer un query para ver cómo funciona __population__.
+
+```javascript
+Curso.findOne({ nombre: '1ero B' }).populate('alumnos')
+.exec(function (err, doc) {
+          if (err) return handleError(err);
+          console.log(doc)
+        });
+```
+
+Como pueden ver en el output del `console.log`, tenemos todos los datos de los documentos tipo _Alumnos_. Justamente la función `populate` hace ese trabajo por nosotros, va a buscar en las demás colleciones y traernos todos los datos a los que estemos haciendo referencia.
