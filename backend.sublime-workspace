@@ -96,56 +96,37 @@
 	"buffers":
 	[
 		{
-			"file": "materialSoporte/ejercicios/clase6/readme.md",
-			"settings":
-			{
-				"buffer_size": 1590,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "materialSoporte/bd.md",
 			"settings":
 			{
-				"buffer_size": 16818,
+				"buffer_size": 20016,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "materialSoporte/ejercicios/clase6/beatlesMongo/app.js",
+			"file": "materialSoporte/ejercicios/clase8/populate.js",
 			"settings":
 			{
-				"buffer_size": 3943,
+				"buffer_size": 1345,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "materialSoporte/ejercicios/clase6/beatlesMongo/models/preguntas.js",
+			"file": "nodeWebStore/models/product.js",
 			"settings":
 			{
-				"buffer_size": 234,
+				"buffer_size": 579,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "materialSoporte/ejercicios/clase6/beatlesMongo/insert.js",
+			"file": "nodeWebStore/models/comment.js",
 			"settings":
 			{
-				"buffer_size": 1184,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "materialSoporte/ejercicios/clase6/beatlesMongo/models/beatles.js",
-			"settings":
-			{
-				"buffer_size": 394,
-				"encoding": "UTF-8",
+				"buffer_size": 314,
 				"line_ending": "Unix"
 			}
 		}
@@ -296,17 +277,33 @@
 	"expanded_folders":
 	[
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte"
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase8",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/middleware",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/models"
 	],
 	"file_history":
 	[
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/autenticacion.md",
+		"/home/atralice/Downloads/app4_v3.R",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase7/readme.md",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/rest.md",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/routes/product.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/routes/index.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/models/product.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/beatles.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/insert.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/app.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/bd.md",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/readme.md",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/mongo/index.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/log.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/preguntas.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/visitas.js",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/beatles.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models.js",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/bd.md",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/mongo/find.js",
 		"/home/atralice/Projects/Plataforma5/Bootcamp/reactsJs/README.md",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase5/beatlesTemplate/views/form.ejs",
@@ -417,14 +414,7 @@
 		"/home/atralice/Cursos/modulo1/clase2/estilosInicio.html",
 		"/home/atralice/Cursos/modulo1/clase2/outline.md",
 		"/home/atralice/Cursos/modulo1/clase2/estilosFinal.html",
-		"/home/atralice/Cursos/modulo1/clase1/bio.txt",
-		"/home/atralice/Cursos/modulo1/clase1/bio.rtf",
-		"/home/atralice/Cursos/modulo1/clase1/bio.md",
-		"/home/atralice/Cursos/modulo1/clase1/prueba.html",
-		"/home/atralice/Downloads/credentials (1) (1).csv",
-		"/home/atralice/Projects/Plataforma5/Node/Proyecto/README.md",
-		"/home/atralice/Projects/Plataforma5/Node/databases/README.md",
-		"/home/atralice/.config/sublime-text-3/Packages/User/Markdown.sublime-settings"
+		"/home/atralice/Cursos/modulo1/clase1/bio.txt"
 	],
 	"find":
 	{
@@ -442,6 +432,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"close",
+			"onect(",
+			"port",
+			"liste",
+			"populate",
+			"rest.md",
 			"readme.md",
 			"people",
 			"chema",
@@ -515,56 +511,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "materialSoporte/ejercicios/clase6/readme.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1590,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								500,
-								500
-							]
-						],
-						"settings":
-						{
-							"parser": "github",
-							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
-							"tab_size": 2,
-							"target": "disk",
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 375.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "materialSoporte/bd.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 16818,
+						"buffer_size": 20016,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14670,
-								14670
+								16819,
+								16819
 							]
 						],
 						"settings":
@@ -572,57 +536,27 @@
 							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 8085.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "materialSoporte/ejercicios/clase6/beatlesMongo/app.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3943,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2519,
-								2519
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 33.0,
-						"translation.y": 1386.0,
+						"translation.y": 11659.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "materialSoporte/ejercicios/clase6/beatlesMongo/models/preguntas.js",
-					"semi_transient": true,
+					"buffer": 1,
+					"file": "materialSoporte/ejercicios/clase8/populate.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 234,
+						"buffer_size": 1345,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								234,
-								234
+								1345,
+								1345
 							]
 						],
 						"settings":
@@ -630,27 +564,27 @@
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 252.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "materialSoporte/ejercicios/clase6/beatlesMongo/insert.js",
+					"buffer": 2,
+					"file": "nodeWebStore/models/product.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1184,
+						"buffer_size": 579,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								40,
-								40
+								34,
+								0
 							]
 						],
 						"settings":
@@ -663,24 +597,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "materialSoporte/ejercicios/clase6/beatlesMongo/models/beatles.js",
-					"semi_transient": false,
+					"buffer": 3,
+					"file": "nodeWebStore/models/comment.js",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 394,
+						"buffer_size": 314,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								394,
-								394
+								0,
+								0
 							]
 						],
 						"settings":
@@ -691,7 +625,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -760,7 +694,7 @@
 		[
 			[
 				"",
-				"~/Projects/Devs/sincoClient/sincoClient.sublime-project"
+				"~/Projects/Devs/sinco/sinco.sublime-project"
 			]
 		],
 		"width": 396.0
