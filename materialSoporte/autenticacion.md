@@ -81,7 +81,7 @@ Un JWT (JSon web Token) consiste en tres partes:
 * Signature, Es el resultado de usar el algoritmo que seteamos en el cookie sobre el header y el payload: Por ejemplo, si el algoritmo es el `HMAC SHA256`: HMACSHA256( base64UrlEncode(header) + "." + base64UrlEncode(payload), secret)
 > Secret es una secuencia de caracteres única elegida arbitrariamente.
 
-![Ejemplo JWT](./jwtsignature.png)
+![Ejemplo JWT](./img/jwtsignature.png)
 
 El flow de creación de JWT es similar al de las Cookies:
 
@@ -100,6 +100,8 @@ Si bien, JWT y cookies parecen similares, hay grandes diferencias:
 
 [Passport](http://passportjs.org/docs) es un middleware de autenticación para Node. 
 
+
+
 Para utilizar Passport tenemos que conocer y configurar tres cosas:
 * __Estrategia de autenticación (Authentication Strategy)__: Podemos autenticarnos a nuestro sitio de varias formas, por ejemplo haciendolo nosotros mismos o delegando la autenticación a un sitio de terceros. Passport nos deja manejar cualquiera de estos casos usando distintas Estrategias.
 * __Middleware__: Como lo vamos a usar en _express_ tenemos que _inicializar_ Passport en nuestra app, esto lo logramos usando la función `passport.initialize()`.
@@ -109,6 +111,22 @@ ej:
   app.use(passport.initialize());
   app.use(passport.session());
   ```
+  Tambien, para el proceso de guardar y recuperar sesiones, vamos a utilizar las funciones `serialize()` y `deserialize()`.
+* Especificar una ruta que use el middleware `passport.authenticate` para empezar el proceso de autenticación.
+
+Empezemos viendo un ejemplo de una ruta en donde se reciben las credenciales de login, y en esta ruta es donde vamos a usar la función `authenticate` de passport, que recibe una _Strategy_ como parámetro, y un callback que se ejecutará luego del proceso de autenticación. En el ejemplo usamos la Estrategia `local`, que definiremos más abajo:
+
+```javascript
+app.post('/login',
+  passport.authenticate('local'),
+  function(req, res) {
+    // Si está función se invocó entonces el proceso de autenticación funcionó correctamente.
+    // `req.user` contiene al usuario autenticado.
+    res.redirect('/users/' + req.user.username);
+  });
+```
+
+Por defecto, si la autenticación __no__ es exitosa, `passport` responderá con un `401 Unauthorized` y no se invocará ningun otro middleware. Si es __exitosa__ se ejecutará el siguiente middleware y la propiedad `req.user` será seteada con información del usuario logeado.
 
 En una típica aplicación, las credenciales para logearse van a ser transmitidas sólamente durante el proceso de Login. Si la autenticación es exitosa, se creará la sesión en el servidor o un token, y luego al recibir nuevos requests con un cookie o un token, se comprobará si se trata de un cliente logeado.
 
@@ -128,6 +146,8 @@ passport.deserializeUser(function(id, done) {
 
 En el ejemplo, sólamente estamos guardando el `user.id` en la sesión, también podríamos guardar más datos si fueran necesarios.
 Cuando deserializamos la sesión en este caso, vamos a tener un `id` de un usuario, por lo tanto para conseguir los datos del usuario deberemos hacer una búsqueda por id.
+
+![Workflow](./img/passport-strategy.png)
 
 ## Passport-Local
 
@@ -153,7 +173,7 @@ passport.use(new LocalStrategy(
 ));
 ```
 
-Como vemos una `Strategy` recibe un callback al que le pasa el `username`, el `password` y una función llamada `done` (esta vendría a ser el equivalente de `next` de _express_). Dentro de ese callback, vamos a codear la implementación de alguna función que busque el password del usuario en la base de datos, y que luego matchee con el que pasaron para ver si coinciden, en el ejemplo esto está dentro de la función `validPassword`. Si hubo un error llamaremos a la función `donde` y como primer parámetro el error. Si no hubo error, pero no está autorizado, llamaremos a la función `done` pasandole `null` como primer parámetro (no hay error) y `false` como segundo, indicando que no se autenticó correctamente. En el caso que sí se haya autenticado correctamente, vamos a llamar a `donde` pasándole información del usuario como segundo parámetro. Luego, esta info se pasa al middleware de serialize que es el encargado de crear y guardar la sesión. Para conocer el flow con más detalle ver este [post](http://toon.io/understanding-passportjs-authentication-flow/).
+Como vemos una `Strategy` recibe un callback al que le pasa el `username`, el `password` y una función llamada `done` (esta vendría a ser el equivalente de `next` de _express_). Dentro de ese callback, vamos a codear la implementación de alguna función que busque el password del usuario en la base de datos, y que luego matchee con el que pasaron para ver si coinciden, en el ejemplo esto está dentro de la función `validPassword`. Si hubo un error llamaremos a la función `done` y como primer parámetro el error. Si no hubo error, pero no está autorizado, llamaremos a la función `done` pasandole `null` como primer parámetro (no hay error) y `false` como segundo, indicando que no se autenticó correctamente. En el caso que sí se haya autenticado correctamente, vamos a llamar a `donde` pasándole información del usuario como segundo parámetro. Luego, esta info se pasa al middleware de serialize que es el encargado de crear y guardar la sesión. Para conocer el flow con más detalle ver este [post](http://toon.io/understanding-passportjs-authentication-flow/).
 
 ## Passport y Mongoose
 
@@ -176,4 +196,35 @@ User.plugin(passportLocalMongoose);
 module.exports = mongoose.model('User', User);
 ```
 
-Ahora, nuestro __User__ va a tener funciones como: 
+Ahora, nuestro __User__ va a tener funciones como las de abajo, entre [otras](https://github.com/saintedlama/passport-local-mongoose#static-methods): 
+* __User.authenticate()__ : Genera una estrategia nueva, en donde se encarga de controlar cuando recibe un usuario y un password si son correctos.
+* __User.serializeUser()__ : Se encarga de guardar datos del usuario en la sesion.
+* __User.deserializeUser()__: Se encarga de recuperar los datos del usuario con el dato de la sesión.
+* __User.register()__: Crea un usuario nuevo y encripta el password en la base datos para luego cheaquealos cuando usemos la estrategia definida en `User.authenticate`.
+
+Ahora tenemos que _configurar_ passport para que utilize las funciones que nos provee nuestro Schema extendido:
+
+```javascript
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new localStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+```
+
+Que son justamente las funciones que _passport_ necesita para funcionar!
+Teniendo todas las funciones listas, lo último que nos falta, es llamar a `passport.authenticate` en alguna ruta. De esta forma vamos a iniciar todo el proceso de _passport_ para autenticar un usuario y crear una sesión.
+
+Por ejemplo: 
+
+```javascript
+app.get("/login", function(req, res){
+  res.render("login")
+})
+
+app.post("/login",passport.authenticate("local",{
+  successRedirect:"/products",
+  failureRedirect:"/login"
+}),function(res,req){
+})
+```
