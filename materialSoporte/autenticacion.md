@@ -100,8 +100,6 @@ Si bien, JWT y cookies parecen similares, hay grandes diferencias:
 
 [Passport](http://passportjs.org/docs) es un middleware de autenticación para Node. 
 
-
-
 Para utilizar Passport tenemos que conocer y configurar tres cosas:
 * __Estrategia de autenticación (Authentication Strategy)__: Podemos autenticarnos a nuestro sitio de varias formas, por ejemplo haciendolo nosotros mismos o delegando la autenticación a un sitio de terceros. Passport nos deja manejar cualquiera de estos casos usando distintas Estrategias.
 * __Middleware__: Como lo vamos a usar en _express_ tenemos que _inicializar_ Passport en nuestra app, esto lo logramos usando la función `passport.initialize()`.
@@ -228,3 +226,79 @@ app.post("/login",passport.authenticate("local",{
 }),function(res,req){
 })
 ```
+
+## Middlewares
+
+Ya tenemos Usuarios y Sesiones, ahora tenemos que agregar la lógica que decida para cada ruta si tal usuario puede acceder o no. Por ejemplo, un producto sólo puede ser modificado por el usuario que lo creó, o tal página puede ser vista por un usuario que esté logeado y no por cualquiera, etc... Para hacerlo vamos a crear una serie de funciones, que vamos a agregar como middleware y vamos a agregarlos a las rutas correspondientes. 
+Primero definamos los middlewares que vamos a necesitar:
+* __isLogged__: Pregunta si el usuario que está intentando entrar está logueado, para eso hace uso de `req.isAuthenticated()`  de passport, que se fija si en el req hay información válida de una sesión. Si está autenticado los dejamos pasar con `next()`, si no, lo direccionamos a otra página. Por ejemplo:
+  ```javascript
+  function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+      return next() // puede pasar
+    }else{
+      res.redirect("/login") // lo mandamos a logearse
+    }
+  }
+  ```
+* __commentOwnership__: Este middleware se fija si el usuario logeado es el dueño (el que escribió) un comentario. 
+  ```javascript
+  function commentOwnership(req,res,next){
+    Comment.findById(req.params.c_id, function(err, comment){
+        if(err){
+          console.log("Database error!");
+          res.redirect("back")
+        }else if(comment.author.id.equals(req.user.id)){ // asi comparamos ObjectIds
+          next() //seguimos!
+        }else{
+          res.redirect("back") //vuelva nomas!
+        }
+      });
+  }
+  ```
+* __productOwnership__: Este es similar al anterior, pero para controlar si el usuario es dueño o fue quien creo el producto que quiere modificar.
+  ```javascript
+  producOwnership=function(req, res, next){
+    Product.findById(req.params.id, function(err, product){
+        if(err){
+          console.log("Database error!");
+          res.redirect("back")
+        }else if(product.author.id.equals(req.user._id)){
+          next() // todo joya!
+        }else{
+          req.flash("error", "You are not allowed to do this")
+          res.redirect("/products/"+req.params.id) //Vuelve al producto
+        }
+      });
+  }
+  ```
+* __userOwnership__: Controlamos si el usuario que quiere modificar un perfil es el usuario en logeado:
+  ```javascript
+  function userOwnership(req, res, next){
+      if(req.user._id.equals(req.params.id)){
+        next() // ok!
+      }else{
+        res.redirect("/user/"+req.user._id) 
+      }
+  }
+  ```
+
+Ahora que tenemos los middlewares configurados, pensemos en qué rutas los tenemos que usar. Por ejemplo:
+* Para crear un producto nuevo tenés que estar logeado, entonces en la ruta para crear productos nuevos:
+  ```javascript
+  app.get("productos/new",isLoggedIn, function(req, res){
+    res.render("new")
+  })
+  ```
+* Si un usuario quiere editar un producto, nos tenemos que asegurar que ese usuario sea el dueño del producto, por lo tanto usamos `productOwnership`:
+  ```javascript
+    app.get("/:id/edit", producOwnership, function(req, res){
+    Product.findById(req.params.id, function(err, foundProduct){
+      if(err){
+        res.render("error")
+      }else{
+        res.render("edit", {product:foundProduct})
+      }
+    })
+  })
+  ```
