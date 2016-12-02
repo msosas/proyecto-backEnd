@@ -232,6 +232,7 @@ app.post("/login",passport.authenticate("local",{
 Ya tenemos Usuarios y Sesiones, ahora tenemos que agregar la lógica que decida para cada ruta si tal usuario puede acceder o no. Por ejemplo, un producto sólo puede ser modificado por el usuario que lo creó, o tal página puede ser vista por un usuario que esté logeado y no por cualquiera, etc... Para hacerlo vamos a crear una serie de funciones, que vamos a agregar como middleware y vamos a agregarlos a las rutas correspondientes. 
 Primero definamos los middlewares que vamos a necesitar:
 * __isLogged__: Pregunta si el usuario que está intentando entrar está logueado, para eso hace uso de `req.isAuthenticated()`  de passport, que se fija si en el req hay información válida de una sesión. Si está autenticado los dejamos pasar con `next()`, si no, lo direccionamos a otra página. Por ejemplo:
+
   ```javascript
   function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
@@ -242,6 +243,7 @@ Primero definamos los middlewares que vamos a necesitar:
   }
   ```
 * __commentOwnership__: Este middleware se fija si el usuario logeado es el dueño (el que escribió) un comentario. 
+
   ```javascript
   function commentOwnership(req,res,next){
     Comment.findById(req.params.c_id, function(err, comment){
@@ -257,6 +259,7 @@ Primero definamos los middlewares que vamos a necesitar:
   }
   ```
 * __productOwnership__: Este es similar al anterior, pero para controlar si el usuario es dueño o fue quien creo el producto que quiere modificar.
+
   ```javascript
   producOwnership=function(req, res, next){
     Product.findById(req.params.id, function(err, product){
@@ -273,6 +276,7 @@ Primero definamos los middlewares que vamos a necesitar:
   }
   ```
 * __userOwnership__: Controlamos si el usuario que quiere modificar un perfil es el usuario en logeado:
+
   ```javascript
   function userOwnership(req, res, next){
       if(req.user._id.equals(req.params.id)){
@@ -285,12 +289,14 @@ Primero definamos los middlewares que vamos a necesitar:
 
 Ahora que tenemos los middlewares configurados, pensemos en qué rutas los tenemos que usar. Por ejemplo:
 * Para crear un producto nuevo tenés que estar logeado, entonces en la ruta para crear productos nuevos:
+
   ```javascript
   app.get("productos/new",isLoggedIn, function(req, res){
     res.render("new")
   })
   ```
 * Si un usuario quiere editar un producto, nos tenemos que asegurar que ese usuario sea el dueño del producto, por lo tanto usamos `productOwnership`:
+
   ```javascript
     app.get("/:id/edit", producOwnership, function(req, res){
     Product.findById(req.params.id, function(err, foundProduct){
