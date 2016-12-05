@@ -12,22 +12,22 @@ app.get("/", function(req, res){
 =========================*/
 
 app.get("/register", function(req,res){
-res.render("register")
+  res.render("register")
 })
 
 app.post("/register", function(req, res){
-var newUser = new User({username: req.body.username})
+  var newUser = new User({username: req.body.username})
 
-User.register(newUser, req.body.password, function(err, user){
-  if(err){
-    req.flash("error", err.message)
-    return res.redirect("register")
-  }
-  passport.authenticate("local")(req, res, function(){
-    req.flash("success","Succesfully created new user! Welcome "+req.user.username+"! ")
-    res.redirect("/products")
+  User.register(newUser, req.body.password, function(err, user){
+    if(err){
+      req.flash("error", err.message)
+      return res.redirect("register")
+    }
+    passport.authenticate("local")(req, res, function(){
+      req.flash("success","Succesfully created new user! Welcome "+req.user.username+"! ")
+      res.redirect("/products")
+    })
   })
-})
 })
 
 app.get("/login", function(req, res){
@@ -35,12 +35,14 @@ res.render("login")
 })
 
 app.post("/login",passport.authenticate("local",{
-successRedirect:"/products",
-failureRedirect:"/login",
-failureFlash: true,
-successFlash: "Welcome back!"
-}),function(res,req){
-})
+    //successRedirect:"/products",
+    failureRedirect:"/login",
+    failureFlash: true,
+    successFlash: "Welcome back!"
+    }),function(res,req){
+      console.log('logueado');
+      req.sendStatus(200);
+    })
 
 app.get("/logout", function(req, res){
 req.logout()

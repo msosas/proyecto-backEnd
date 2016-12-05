@@ -96,37 +96,47 @@
 	"buffers":
 	[
 		{
-			"file": "materialSoporte/bd.md",
+			"file": "materialSoporte/autenticacion.md",
 			"settings":
 			{
-				"buffer_size": 20016,
+				"buffer_size": 17812,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "materialSoporte/ejercicios/clase8/populate.js",
+			"contents": "var mongoose              = require(\"mongoose\"),\n    passportLocalMongoose = require(\"passport-local-mongoose\")\n\nvar userSchema=new mongoose.Schema({\n  username:String,\n  password:String,\n  birthdate:String,\n  hometown:String,\n  sex:String,\n  email:String\n}, {collection: 'usuarios'})\n\nuserSchema.plugin(passportLocalMongoose)\n\nmodule.exports= mongoose.model(\"User\", userSchema)\n",
+			"file": "nodeWebStore/models/user.js",
+			"file_size": 353,
+			"file_write_time": 131225820206989522,
 			"settings":
 			{
-				"buffer_size": 1345,
+				"buffer_size": 379,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "nodeWebStore/routes/index.js",
+			"settings":
+			{
+				"buffer_size": 1695,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "nodeWebStore/models/product.js",
+			"file": "nodeWebStore/routes/product.js",
 			"settings":
 			{
-				"buffer_size": 579,
-				"encoding": "UTF-8",
+				"buffer_size": 1797,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "nodeWebStore/models/comment.js",
+			"file": "nodeWebStore/views/edit.ejs",
 			"settings":
 			{
-				"buffer_size": 314,
+				"buffer_size": 1111,
 				"line_ending": "Unix"
 			}
 		}
@@ -138,10 +148,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 142.0,
-		"last_filter": "previre",
+		"height": 230.0,
+		"last_filter": "html",
 		"selected_items":
 		[
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
 			[
 				"previre",
 				"Markdown Preview: Preview in Browser"
@@ -211,10 +225,6 @@
 				"Snippet: html"
 			],
 			[
-				"html",
-				"Set Syntax: HTML"
-			],
-			[
 				"jsva",
 				"Set Syntax: JavaScript (Babel)"
 			],
@@ -279,25 +289,29 @@
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase8",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/middleware",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/models"
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/models",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/routes",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/views"
 	],
 	"file_history":
 	[
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/app.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/middleware/index.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/bd.md",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase8/populate.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/models/product.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/models/comment.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/autenticacion.md",
 		"/home/atralice/Downloads/app4_v3.R",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase7/readme.md",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/rest.md",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/routes/product.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/routes/index.js",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/models/product.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/beatles.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/insert.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/app.js",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/bd.md",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/readme.md",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/mongo/index.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/log.js",
@@ -338,7 +352,6 @@
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/eJercicios/clase2/emitter.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/clases/clase1/app.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/modulos.md",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/app.js",
 		"/home/atralice/Projects/Plataforma5/Bootcamp/Node/JavaScript/oop.text",
 		"/home/atralice/Downloads/Takeout/Location History/loc.json",
 		"/run/media/atralice/storage/otros/WeirdParts/contenido.txt",
@@ -411,10 +424,7 @@
 		"/home/atralice/Projects/Devs/sincoClient/app/components/Header.js",
 		"/home/atralice/Projects/Devs/sincoClient/app/components/Layout.js",
 		"/home/atralice/Cursos/modulo1/clase2/style.html",
-		"/home/atralice/Cursos/modulo1/clase2/estilosInicio.html",
-		"/home/atralice/Cursos/modulo1/clase2/outline.md",
-		"/home/atralice/Cursos/modulo1/clase2/estilosFinal.html",
-		"/home/atralice/Cursos/modulo1/clase1/bio.txt"
+		"/home/atralice/Cursos/modulo1/clase2/estilosInicio.html"
 	],
 	"find":
 	{
@@ -432,6 +442,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"method",
+			"usua",
+			"donde",
+			"don",
+			"doner",
+			"authenticate",
+			"user.",
+			"User.",
+			"User",
+			"User.a",
+			"User",
+			"passport",
 			"close",
 			"onect(",
 			"port",
@@ -511,52 +533,54 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "materialSoporte/bd.md",
+					"file": "materialSoporte/autenticacion.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 20016,
+						"buffer_size": 17812,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								16819,
-								16819
+								16125,
+								16125
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage"
+							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 11659.0,
+						"translation.y": 8812.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "materialSoporte/ejercicios/clase8/populate.js",
+					"file": "nodeWebStore/models/user.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1345,
+						"buffer_size": 379,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1345,
-								1345
+								281,
+								281
 							]
 						],
 						"settings":
@@ -564,7 +588,7 @@
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 252.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
@@ -572,19 +596,19 @@
 				},
 				{
 					"buffer": 2,
-					"file": "nodeWebStore/models/product.js",
+					"file": "nodeWebStore/routes/index.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 579,
+						"buffer_size": 1695,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								34,
-								0
+								788,
+								790
 							]
 						],
 						"settings":
@@ -594,32 +618,64 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 567.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "nodeWebStore/models/comment.js",
+					"file": "nodeWebStore/routes/product.js",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 314,
+						"buffer_size": 1797,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1331,
+								1331
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 882.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "nodeWebStore/views/edit.ejs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1111,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								218,
+								225
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

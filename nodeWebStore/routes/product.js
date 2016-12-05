@@ -12,13 +12,24 @@ app.get("/", function(req, res){
   }
   })
 
-})
+});
+
+app.get("/todos", function(req, res){
+  Product.find({}, function(err, products){
+    if(err){
+      res.render("error")
+    }else{
+    res.send(products);
+  }
+  })
+
+});
 
 app.get("/new",middleware.isLoggedIn, function(req, res){
   res.render("new")
 })
 
-app.post("/", function(req, res){
+app.post("/", middleware.isLoggedIn, function(req, res){
   var product=req.body.product
   var author={
     id:req.user._id,
@@ -26,11 +37,14 @@ app.post("/", function(req, res){
   }
   product.author=author
   product.available=!!Number(product.stock)
-  Product.create(req.body.product, function(err){
+  Product.create(req.body.product, function(err, doc){
     if(err){
-      res.render("error")
+      console.log(err);
+      // res.render("error")
+      res.sendStatus(500);
     }else{
-      res.redirect("/products")
+      //res.redirect("/products")
+      res.sendStatus(200);
     }
   })
 

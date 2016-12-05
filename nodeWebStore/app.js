@@ -51,6 +51,9 @@ var express         = require("express"),
   app.use("/products", productRoutes)
   app.use("/products/:id/comments", commentRoutes)
 
-  app.listen(8000, function(){
+  app.listen(8001, function(){
     console.log("funca!")
 })
+
+
+module.exports = app ; // Para testear

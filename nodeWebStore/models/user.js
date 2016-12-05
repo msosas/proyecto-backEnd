@@ -8,7 +8,7 @@ var userSchema=new mongoose.Schema({
   hometown:String,
   sex:String,
   email:String
-})
+}, {collection: 'usuarios'})
 
 userSchema.plugin(passportLocalMongoose)
 
