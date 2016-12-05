@@ -7,9 +7,21 @@ var chai = require('chai') , chaiHttp = require('chai-http');
 
 var server = require('../app');
 var should = chai.should();
-var expect = chai.expect();
+var expect = chai.expect;
 
 chai.use(chaiHttp);
+ 
+// Pruebas de validacion de Mongoose
+describe('Modelo Productos', function() {
+    it('should be invalid if price is empty', function(done) {
+        var m = new Product({name : 'Producto Nuevo'});
+ 
+        m.validate(function(err) {
+            expect(err.errors.price).to.exist;
+            done();
+        });
+    });
+});
 
 //
 describe('Productos', function() {
