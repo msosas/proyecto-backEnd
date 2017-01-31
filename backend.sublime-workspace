@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"Co",
+				"Cookies"
+			],
+			[
+				"pro",
+				"products"
+			],
+			[
+				"produ",
+				"products"
+			],
+			[
 				"pre",
 				"preguntasSchema"
 			],
@@ -18,10 +30,6 @@
 			[
 				"w",
 				"width"
-			],
-			[
-				"pro",
-				"profilePic"
 			],
 			[
 				"b",
@@ -96,30 +104,48 @@
 	"buffers":
 	[
 		{
-			"file": "materialSoporte/autenticacion.md",
+			"file": "materialSoporte/testing.md",
 			"settings":
 			{
-				"buffer_size": 17812,
+				"buffer_size": 16670,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "var mongoose              = require(\"mongoose\"),\n    passportLocalMongoose = require(\"passport-local-mongoose\")\n\nvar userSchema=new mongoose.Schema({\n  username:String,\n  password:String,\n  birthdate:String,\n  hometown:String,\n  sex:String,\n  email:String\n}, {collection: 'usuarios'})\n\nuserSchema.plugin(passportLocalMongoose)\n\nmodule.exports= mongoose.model(\"User\", userSchema)\n",
-			"file": "nodeWebStore/models/user.js",
-			"file_size": 353,
-			"file_write_time": 131225820206989522,
+			"file": "materialSoporte/ejercicios/clase12/prueba.js",
 			"settings":
 			{
-				"buffer_size": 379,
+				"buffer_size": 580,
+				"encoding": "UTF-8",
+				"line_ending": "Unix",
+				"name": "var chai = require('chai');"
+			}
+		},
+		{
+			"file": "nodeWebStore/tests/products.js",
+			"settings":
+			{
+				"buffer_size": 2753,
+				"encoding": "UTF-8",
+				"line_ending": "Unix",
+				"name": "//During the test the env variable is set to test"
+			}
+		},
+		{
+			"file": "nodeWebStore/models/product.js",
+			"settings":
+			{
+				"buffer_size": 604,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "nodeWebStore/routes/index.js",
+			"file": "nodeWebStore/package.json",
 			"settings":
 			{
-				"buffer_size": 1695,
+				"buffer_size": 643,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -128,15 +154,8 @@
 			"file": "nodeWebStore/routes/product.js",
 			"settings":
 			{
-				"buffer_size": 1797,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "nodeWebStore/views/edit.ejs",
-			"settings":
-			{
-				"buffer_size": 1111,
+				"buffer_size": 2080,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -289,26 +308,33 @@
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase12",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/middleware",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/models",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/routes",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/views"
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/tests",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/views",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/views/partials"
 	],
 	"file_history":
 	[
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase12/package.json",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/routes/index.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/app.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/routes/product.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/package.json",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/views/edit.ejs",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/models/user.js",
+		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/autenticacion.md",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/middleware/index.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/bd.md",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase8/populate.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/models/product.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/models/comment.js",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/autenticacion.md",
 		"/home/atralice/Downloads/app4_v3.R",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase7/readme.md",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/rest.md",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/routes/product.js",
-		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/nodeWebStore/routes/index.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/models/beatles.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/insert.js",
 		"/home/atralice/Projects/Plataforma5/proyecto-backEnd/materialSoporte/ejercicios/clase6/beatlesMongo/app.js",
@@ -420,11 +446,7 @@
 		"/home/atralice/Projects/Devs/sincoClient/app/components/Footer.js",
 		"/home/atralice/Projects/Devs/sincoClient/package.json",
 		"/home/atralice/Projects/Devs/sincoClient/app/index.html",
-		"/home/atralice/Projects/Devs/sincoClient/app/styles/footer.css",
-		"/home/atralice/Projects/Devs/sincoClient/app/components/Header.js",
-		"/home/atralice/Projects/Devs/sincoClient/app/components/Layout.js",
-		"/home/atralice/Cursos/modulo1/clase2/style.html",
-		"/home/atralice/Cursos/modulo1/clase2/estilosInicio.html"
+		"/home/atralice/Projects/Devs/sincoClient/app/styles/footer.css"
 	],
 	"find":
 	{
@@ -442,6 +464,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"chai.",
+			"server",
+			"index",
+			"8001",
+			"server",
+			"8000",
+			"server",
+			"app.",
+			"addres",
+			"server",
 			"method",
 			"usua",
 			"donde",
@@ -516,6 +548,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"8001",
 			"beatles[i]",
 			"callback",
 			"evento",
@@ -538,19 +571,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "materialSoporte/autenticacion.md",
+					"file": "materialSoporte/testing.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 17812,
+						"buffer_size": 16670,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								16125,
-								16125
+								251,
+								251
 							]
 						],
 						"settings":
@@ -560,7 +593,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 8812.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
@@ -568,24 +601,27 @@
 				},
 				{
 					"buffer": 1,
-					"file": "nodeWebStore/models/user.js",
+					"file": "materialSoporte/ejercicios/clase12/prueba.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 379,
+						"buffer_size": 580,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								281,
-								281
+								580,
+								580
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+							"auto_name": "var chai = require('chai');",
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -596,29 +632,30 @@
 				},
 				{
 					"buffer": 2,
-					"file": "nodeWebStore/routes/index.js",
+					"file": "nodeWebStore/tests/products.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1695,
+						"buffer_size": 2753,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								788,
-								790
+								805,
+								805
 							]
 						],
 						"settings":
 						{
+							"auto_name": "//During the test the env variable is set to test",
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 567.0,
+						"translation.y": 1756.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -626,19 +663,19 @@
 				},
 				{
 					"buffer": 3,
-					"file": "nodeWebStore/routes/product.js",
-					"semi_transient": true,
+					"file": "nodeWebStore/models/product.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1797,
+						"buffer_size": 604,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1331,
-								1331
+								130,
+								130
 							]
 						],
 						"settings":
@@ -648,7 +685,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 882.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -656,24 +693,24 @@
 				},
 				{
 					"buffer": 4,
-					"file": "nodeWebStore/views/edit.ejs",
+					"file": "nodeWebStore/package.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1111,
+						"buffer_size": 643,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								218,
-								225
+								72,
+								72
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -682,6 +719,36 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "nodeWebStore/routes/product.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2080,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								481,
+								481
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 382.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -730,7 +797,7 @@
 	"project": "backend.sublime-project",
 	"replace":
 	{
-		"height": 54.0
+		"height": 68.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -750,7 +817,15 @@
 		[
 			[
 				"",
-				"~/Projects/Devs/sinco/sinco.sublime-project"
+				"~/Projects/Devs/sincoClient/sincoClient.sublime-project"
+			],
+			[
+				"sincocl",
+				"~/Projects/Devs/sincoClient/sincoClient.sublime-project"
+			],
+			[
+				"sincl",
+				"~/Projects/Devs/sincoClient/sincoClient.sublime-project"
 			]
 		],
 		"width": 396.0

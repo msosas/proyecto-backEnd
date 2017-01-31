@@ -1,4 +1,3 @@
-
 var mongoose = require("mongoose");
 var Product = require('../models/product');
 
@@ -26,7 +25,7 @@ describe('Modelo Productos', function() {
 //
 describe('Productos', function() {
 
-  before(function(done) { // antes de cada test borramos todos
+  before(function(done) { // antes de los test borramos todos
       Product.remove({}, function(err) { 
          done();         
       });     
@@ -86,7 +85,7 @@ describe('Productos', function() {
       });
 
       it('should GET all the products, and be one Product Only', function(done)  {
-        chai.request('http://localhost:8001')
+        chai.request(server)
             .get('/products/todos')
             .end( function(err, res) {
                 res.should.have.status(200);
