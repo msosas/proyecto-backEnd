@@ -1,3 +1,22 @@
+### Módulos
+
+Def: Un bloque de código reusable, cuya existencia no altera accidentalmente el comportamiento de otros bloques de código.
+Este concepto ya existia en otros lenguajes de programación y era muy usado para estructurar proyectos. De todos modos, los módulos no eran parte del standart en ECMAscript (lo agregaron en la última versión), pero Nodejs lo introdujo bajo el nombre de _Commonjs Modules_, que era básicamente un acuerdo (un standart) sobre cómo deberían estar estructurados los módulos.
+
+### Cómo funciona CommonJs Modules?
+
+Básicamente, el standart dice lo siguiente:
+
+- Cada archivo es un ḿodulo, y cada módulo es un archivo separado.
+- Todo lo que queremos exportar va a ser expuesto desde un único punto.
+
+Para entender el standart tenemos que tener dos conceptos en claro:
+
+* First-Class Functions: Las funciones en javascript son tratadas igual que cualquier otro objeto, es decir que podés guardarlas en variables, pasarlas como argumentos, guardarlas en arreglos, etcs...
+* Function Expressions: Como las funciones son first-class, al escribir una expresión de funcion estoy creando la misma, eso quiere decir que puedo crear funciones en cualquier parte del código. 
+
+Vamos a empezar construyendo nuestro propio módulo! una vez que lo tengamos, vamos a ver como usarlo. Entendiendo así todo el ciclo.
+
 #### Construyendo un módulo
 
 Empezamos con un un archivo `js` vacío. Lo llamaremos `hola.js`, esté será nuestro primer módulo. Lo único que hará este módulo es saludar:
@@ -22,7 +41,7 @@ Hagamos algo más interesante, vamos a `hola.js` y creemos una función y luego 
 
 ```javascript
 var saludar = function() {
-	console.log('Hola!!!');
+    console.log('Hola!!!');
 }
 saludar();
 ```
@@ -32,16 +51,16 @@ Corramos de nuevo `app.js`:
 ![require](./img/require2.png)
 
 El resultado es el mismo!
-Ahora, si no invocamos `saludar()` dentro de `hola.js`, creen que la podremos invocar (usar) en `app.js`? Hagamos la prueba!
+Ahora, si no invocamos `saludar()` dentro de `hola.ja`, creen que la podremos invocar (usar) en `app.js`? Hagamos la prueba!
 
 Comentamos la invocación en `hola.js`:
 ```javascript
 var saludar = function() {
-	console.log('Hola!!!');
+    console.log('Hola!!!');
 }
 //saludar();
 ```
-Invocamos en `app.js`:
+Invacamos en `app.js`:
 ```javascript
 require('./hola.js');
 saludar();
@@ -61,12 +80,12 @@ Nodejs nos permite hacerlo usando `module.exports`, que es una variable especial
 
 ```javascript
 var saludar = function() {
-	console.log('Hola!!!');
+    console.log('Hola!!!');
 };
 
 module.exports = saludar;
 ```
-Ahora este módulo está exponiendo el objeto `saludar`. Para usarlo en nuestro módulo tenemos que guardar lo que devuelve `require` en una variable (puedo llamar a la nueva variable como quiera):
+Ahora este módulo está exponiendo el objeto `greet`. Para usarlo en nuestro módulo tenemos que guardar lo que devuelve `require` en una variable (puedo llamar a la nueva variable como quiera):
 
 ```javascript
 var hola = require('./hola.js');
@@ -84,6 +103,24 @@ Resumiendo:
 
 - __Require__ es una función que recibe un _path_.
 - __module.exports__ es lo que retorna la funcion _require_.
+
+### Require con modulos Core o nativos
+
+También podemos importar módulos CORE (los que hablamos al principio) usando _require_. Esta función está preparada para que si no encuentra un archivo con el nombre que le pasamos, busca una carpeta, y si no encuentra busca en los módulos nativos.
+Podemos ir a la [documentación](https://nodejs.org/dist/latest-v6.x/docs/api/) y ver los módulos que podemos usar.
+
+Veamos como podemos importar algo de esa funcionalidad. Como ejemplo vamos a importar el módulo llamado [`utilities`](https://nodejs.org/dist/latest-v6.x/docs/api/util.html), en la doc vemos que el módulo se llama `util`.
+Por lo tanto lo vamos a importar escribiendo
+
+```javascript
+var util = require('util'); // No usamos ./ porque es un modulo core 
+
+var nombre = 'Toni';
+var saludo = util.format('Hola, %s', nombre);
+util.log(saludo);
+```
+
+¿Que hace este código? Busquen en la [documentación](https://nodejs.org/dist/latest-v6.x/docs/api/util.html#util_util_format_format) por la función `format()` y `log()` e intenten predecir que hará ese código.
 
 #### Algunos patrones de Require.
 
@@ -110,8 +147,8 @@ var english = require('./english');
 var spanish = require('./spanish');
 
 module.exports = {
-	english: english,
-	spanish: spanish	
+    english: english,
+    spanish: spanish    
 };
 ```
 
@@ -124,7 +161,7 @@ spanish.js
 var saludos = require('./greetings.json');
 
 var greet = function() {
-	console.log(saludos.es);
+    console.log(saludos.es);
 }
 
 module.exports = greet;
@@ -134,7 +171,7 @@ english.js
 var saludos = require('./greetings.json');
 
 var greet = function() {
-	console.log(saludos.en);
+    console.log(saludos.en);
 }
 
 module.exports = greet;
@@ -144,11 +181,21 @@ y en greetings.json vamos a tener los saludos per se:
 
 ```javascript
 {
-	"en": "Hello",
-	"es": "Hola"
+    "en": "Hello",
+    "es": "Hola"
 }
 ```
 
 Si ejecutamos nuestra `app.js`:
 
 ![patron](./img/patron.png)
+
+##### Más Patrones
+
+En la carpeta `./patrones/otro` hemos puesto varios files distintos llamados `saludos` que van del uno al cinco, y luego los importamos en el archivo `app.js`. En cada módulo exportamos lo que necesitamos de manera distinta, cada uno de esas formas constitute un patrón.
+
+Dentro de cada archivo en los comentarios está explicado en más detalle el patrón.
+
+De nuevo, __no hay una mejor forma, prueben todos los patrones y vean cual es el que les gusta y cual los hace felices!__
+
+

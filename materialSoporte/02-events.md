@@ -29,6 +29,7 @@ Los componentes que vemos en la figura son:
 
 Toda esta interacción con el SO, el manejo del Task Queue y el Evento loop está implementado en la libreria [__libuv__](http://docs.libuv.org/en/v1.x/) que es la piedra angular de Nodejs. De hecho, su logo es un Unicornio T-rex, es demasiado copada:var fs = require('fs');
 
+```javascript
 var saludo = fs.readFileSync(__dirname + '/greet.txt', 'utf8');
 console.log(saludo);
 
@@ -40,6 +41,7 @@ fs.readFile(__dirname + '/greet.txt', 'utf8', function(err, data) {
 });
 
 console.log('Listo!');
+```
 
 ![libuv](./img/libuv.png)
 
