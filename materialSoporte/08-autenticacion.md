@@ -42,25 +42,25 @@ Este método es el más simple, pero tiene las siguentes contras:
 
 ## Cookies
 
-Un servidor puede enviar un header HTTP llamado `set-Cookie`. Cuando el browser lo recibe, este lo guarda para enviar esa misma _Cookie_ en cada HTTP request que se haga al mismo origen (el que seteó la _Cookie_). Las cookies fueron diseñadas para guardar información del _estado_ de la sesión dentro del cliente (por ejemplo, la cantidad de items que tiene el cliente en un carrito de compras). Hoy se usan mucho para como __authentications cookies__, es decir, que se mantiene información sobre si el cliente está logeado o no, o con cuál cuenta están logeados, etc... 
+Un servidor puede enviar un header HTTP llamado `set-Cookie`. Cuando el browser lo recibe, este lo guarda para enviar esa misma _Cookie_ en cada HTTP request que se haga al mismo origen (el que seteó la _Cookie_). Las cookies fueron diseñadas para guardar información del _estado_ de la sesión dentro del cliente (por ejemplo, la cantidad de items que tiene el cliente en un carrito de compras). Hoy se usan mucho como __authentications cookies__, es decir, que se mantiene información sobre si el cliente está logeado o no, o con cuál cuenta están logeados, etc... 
 
 ![Cookie](./img/cookie.png)
 
 Veamos un paso por paso de cómo se usarian cookies para autenticarse.
 
-1. Cliente -> Crear una cuenta
+1. __Cliente__ -> _Crear una cuenta_
   El primer paso es que el cliente se cree una cuenta, para eso va a enviar un HTTP request al endpoint indicado, y dentro su usuario y password.
-2. Servidor -> Manejar la creación de cuentas
+2. __Servidor__ -> _Manejar la creación de cuentas_
   El servidor tiene que poder tomar el nuevo usuario y password enviado por el cliente y guardarlos en su base de datos. El password se debería guardar encriptado para que nadie pueda verlo.
-3. Cliente -> Logearse
+3. __Cliente__ -> _Logearse_
   Ahora el usuario quiere logearse, para eso manda también un request HTTP y dentro sus credenciales (usuario y password).
-4. Servidor -> Manejar Logeo
+4. __Servidor__ -> _Manejar Logeo_
   El servidor busca el usuario y password, encripta el último con el mismo método que cuando lo guardó y compara con el que tiene en la base de datos. Si no es correcto, podemos enviar una respuesta diciendo que no está autorizado (error 401).
-5. Servidor -> Generar Cookies
+5. __Servidor__ -> _Generar Cookies_
   Si las credenciales coinciden, vamos a crear un token de acceso, que identifica unívocamente a una session de un usuario. El servidor, entonces, hace dos cosas:
     * Guarda la sesión (el token) en su base de datos o memoria.
     * Envía una cookie con la información de la sesión al cliente.
-6. Cliente -> Seguir haciendo Requests
+6. __Cliente__ -> _Seguir haciendo Requests_
   Ahora ya estamos logeados porque tenemos la cookie con información sobre la sesión. Cada vez que hacemos un request, el browser envía la cookie, y el servidor se fija si efectivamente la sesión de ese cliente está en su base de datos o memoria.
 
 ### Algunos Consejos con Cookies
@@ -105,7 +105,13 @@ Para utilizar Passport tenemos que conocer y configurar tres cosas:
 * __Middleware__: Como lo vamos a usar en _express_ tenemos que _inicializar_ Passport en nuestra app, esto lo logramos usando la función `passport.initialize()`.
 * __Sessions__: Si vamos a usar un esquema en el que guardemos las sesiones del usuario en el servidor, también vamos a tener que inicializar el middleware de sesiones, para eso usamos: `passport.session()`;
 ej:
-  ```
+  ```javascript
+  var expressSession = require('express-session');
+  app.use(expressSession({
+    secret: 'string secreta',
+    resave: false,
+    saveUninitialized: false,
+  }));
   app.use(passport.initialize());
   app.use(passport.session());
   ```
@@ -172,6 +178,13 @@ passport.use(new LocalStrategy(
 ```
 
 Como vemos una `Strategy` recibe un callback al que le pasa el `username`, el `password` y una función llamada `done` (esta vendría a ser el equivalente de `next` de _express_). Dentro de ese callback, vamos a codear la implementación de alguna función que busque el password del usuario en la base de datos, y que luego matchee con el que pasaron para ver si coinciden, en el ejemplo esto está dentro de la función `validPassword`. Si hubo un error llamaremos a la función `done` y como primer parámetro el error. Si no hubo error, pero no está autorizado, llamaremos a la función `done` pasandole `null` como primer parámetro (no hay error) y `false` como segundo, indicando que no se autenticó correctamente. En el caso que sí se haya autenticado correctamente, vamos a llamar a `donde` pasándole información del usuario como segundo parámetro. Luego, esta info se pasa al middleware de serialize que es el encargado de crear y guardar la sesión. Para conocer el flow con más detalle ver este [post](http://toon.io/understanding-passportjs-authentication-flow/).
+
+### LoggedIn y Logout
+
+En las requests subsecuentes el middleware de `passport` va a agregar algunas funciones al `req` que vamos a usar para ver si el usuario está logeado, o bien para destruir la sesión de ese usuario, o sea, deslogearlo:
+
+* __req.isAuthenticated()__: Básicamente, devuelve true si passport encuentra cookies que coincidan con las que tiene en la base de datos de sesiones. Si no las encuentra, devuelve False.
+* __req.logOut()__: Destruye la información de sesión del usuario, por lo tanto el usuario no va a estar más logeado.
 
 ## Passport y Mongoose
 
