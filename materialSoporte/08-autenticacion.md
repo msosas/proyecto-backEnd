@@ -282,7 +282,6 @@ Primero definamos los middlewares que vamos a necesitar:
         }else if(product.author.id.equals(req.user._id)){
           next() // todo joya!
         }else{
-          req.flash("error", "You are not allowed to do this")
           res.redirect("/products/"+req.params.id) //Vuelve al producto
         }
       });
