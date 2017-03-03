@@ -70,7 +70,7 @@ app.post('/register', urlParser, function (req, res) {
 // Logout
 
 app.get('/logout', function(req, res){
-  req.logout()
+  req.logout();
   res.send('Deslogeado');
 });
 
