@@ -96,7 +96,7 @@ describe('/GET products', function()  {
         chai.request(server)
           .post('/newBeatle') // Reemplazá por tu endpoint de nuevo
           .set('content-type', 'application/x-www-form-urlencoded')
-          .send({newBeatle})
+          .send(newBeatle)
           .end(function (err, res) {
             res.should.have.status(200);
             res.body.length.should.be.eql(1); // Cambiar por el número de beatles
@@ -111,7 +111,7 @@ describe('/GET products', function()  {
         chai.request(server)
           .delete('/delete') // Reemplazá por tu endpoint de delete
           .set('content-type', 'application/x-www-form-urlencoded')
-          .send({toBeDeleted})
+          .send(toBeDeleted)
           .end(function (err, res) {
             res.should.have.status(200);
             res.body.length.should.be.eql(0); // Cambiar por el número de beatles
