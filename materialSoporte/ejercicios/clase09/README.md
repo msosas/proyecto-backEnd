@@ -30,12 +30,12 @@ describe('Ejercicio 1', function() {
   describe('#EmpiezaConS()', function() {
     it('Debería retornar ["Santi","Sol","Sal"]', function() {
       chai.assert.deepEqual(
-        EmpiezaConS['Santi','Maria','Sol','Sal','Guille'],
+        EmpiezaConS(['Santi','Maria','Sol','Sal','Guille']),
         ['Santi','Sol','Sal']);
     });
     it('Debería retornar ["Solano"]', function() {
       chai.assert.deepEqual(
-        EmpiezaConS['Toni','Maria','Solano','Bob','Guille'],
+        EmpiezaConS(['Toni','Maria','Solano','Bob','Guille']),
         ['Solano']);
     });
   });
@@ -45,10 +45,10 @@ describe('Ejercicio 1', function() {
         chai.assert.isOk(sumaMayorQue([1,2], 1));
     });
     it('Debería retornar False', function() {
-        chai.assert.isOk(sumaMayorQue([1,2], 10));
+        chai.assert.isNotOk(sumaMayorQue([1,2], 10));
     });
     it('Debería retornar False', function() {
-        chai.assert.isOk(sumaMayorQue([1,2, 'Toni'], 0));
+        chai.assert.isNotOk(sumaMayorQue([1,2, 'Toni'], 0));
     });
   });
 });
